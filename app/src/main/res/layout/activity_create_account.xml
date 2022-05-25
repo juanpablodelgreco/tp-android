@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccount">
+    tools:context=".CreateAccountActivity">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -14,11 +14,11 @@
         tools:layout_editor_absoluteY="1dp">
 
         <EditText
-            android:id="@+id/createAccountInputName"
+            android:id="@+id/createAccountInputFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Name"
+            android:hint="First Name"
             android:inputType="textPersonName|text" />
 
         <EditText
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="LastName"
+            android:hint="Last Name"
             android:inputType="textPersonName" />
 
         <EditText
@@ -46,7 +46,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/createAccountInputCommissionl"
+            android:id="@+id/createAccountInputCommission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
