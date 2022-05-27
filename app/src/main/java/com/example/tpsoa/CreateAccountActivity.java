@@ -7,7 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.example.tpsoa.view.LoginActivity;
 
 public class CreateAccountActivity extends Activity {
 
@@ -33,6 +34,36 @@ public class CreateAccountActivity extends Activity {
         btnCreateAccount = (Button) findViewById(R.id.createAccountButton);
         btnCreateAccount.setOnClickListener(listenerButtons);
         Log.i("Ejecuto", "onCreate createAccount Activity");
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.i("Ejecuto", "onStart createAccount Activity");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("Ejecuto", "onResume createAccount Activity");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("Ejecuto", "onPause createAccount Activity");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("Ejecuto", "onStop createAccount Activity");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("Ejecuto", "onDestroy createAccount Activity");
     }
 
     private View.OnClickListener listenerButtons = new View.OnClickListener(){
