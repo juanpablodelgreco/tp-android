@@ -1,4 +1,4 @@
-package com.example.tpsoa.view;
+package com.example.tpsoa.views;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,18 +7,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.tpsoa.CreateAccountActivity;
 import com.example.tpsoa.HomeActivity;
 import com.example.tpsoa.R;
-import com.example.tpsoa.model.LoginInteractorImp;
-import com.example.tpsoa.presenter.LoginPresenter;
-import com.example.tpsoa.presenter.LoginPresenterImp;
+import com.example.tpsoa.models.LoginInteractorImp;
+import com.example.tpsoa.presenters.LoginPresenter;
+import com.example.tpsoa.presenters.LoginPresenterImp;
 
 public class LoginActivity extends Activity implements LoginView {
 
     private EditText username;
     private EditText password;
+    private TextView errorView;
     private ProgressBar progressBar;
     private LoginPresenter presenter;
 
@@ -29,6 +31,7 @@ public class LoginActivity extends Activity implements LoginView {
 
         username = findViewById(R.id.loginInputUsername);
         password = findViewById(R.id.loginInputPassword);
+        errorView = findViewById(R.id.loginInformationText);
         progressBar = findViewById(R.id.progressBar);
         findViewById(R.id.loginButton).setOnClickListener(listenerButtons);
         findViewById(R.id.loginCreateAccountButton).setOnClickListener(listenerButtons);
@@ -62,7 +65,6 @@ public class LoginActivity extends Activity implements LoginView {
 
     @Override
     protected void onDestroy(){
-        presenter.onDestroy();
         super.onDestroy();
         Log.i("Ejecuto", "onDestroy login Activity");
     }
@@ -70,27 +72,6 @@ public class LoginActivity extends Activity implements LoginView {
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void setUsernameError() {
-        username.setError("Invalid username.");
-    }
-
-    @Override
-    public void setPasswordError() {
-        password.setError("Invalid password.");
-    }
-
-    @Override
-    public void navigateToHome() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -107,7 +88,7 @@ public class LoginActivity extends Activity implements LoginView {
 
             switch (v.getId()){
                 case R.id.loginButton:
-                    presenter.validateCredentials(username.getText().toString(), password.getText().toString());
+                    presenter.validateCredentials(getApplicationContext(), username.getText().toString(), password.getText().toString());
                     break;
                 case R.id.loginCreateAccountButton:
                     navigateToCreateAccount();
