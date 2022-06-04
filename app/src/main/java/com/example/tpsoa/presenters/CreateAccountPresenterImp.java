@@ -14,7 +14,7 @@ public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFini
     }
 
     @Override
-    public void createAccount(String name, String lastName, String dni, String email, String password, int comission, int group) {
+    public void createAccount(String name, String lastName, String dni, String email, String password, String comission, String group) {
         createAccountInteractor.createAccount(this, name, lastName, dni, email, comission, password, group);
     }
 
@@ -28,7 +28,7 @@ public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFini
         if(code == 200){
             createAccountView.navigateToLogin();
         }else{
-            createAccountView.showErrorMessage("Errror al crear el usuario.");
+            createAccountView.showErrorMessage(result);
         }
     }
 
@@ -39,6 +39,6 @@ public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFini
 
     @Override
     public void onValidationFieldFail(String message) {
-
+        createAccountView.showErrorMessage(message);
     }
 }

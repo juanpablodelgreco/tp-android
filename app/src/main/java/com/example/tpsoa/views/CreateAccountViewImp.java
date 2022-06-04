@@ -24,7 +24,7 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     private EditText lastName;
     private EditText dni;
     private EditText email;
-    private EditText comission;
+    private EditText commission;
     private EditText password;
     private EditText group;
     private TextView errorView;
@@ -40,7 +40,7 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         lastName =(EditText) findViewById(R.id.createAccountInputLastName);
         dni =(EditText) findViewById(R.id.createAccountInputDNI);
         email =(EditText) findViewById(R.id.createAccountInputEmail);
-        comission =(EditText) findViewById(R.id.createAccountInputCommission);
+        commission =(EditText) findViewById(R.id.createAccountInputCommission);
         password =(EditText) findViewById(R.id.createAccountInputPassword);
         group =(EditText) findViewById(R.id.createAccountInputGroup);
         errorView = (TextView) findViewById(R.id.createAccountError);
@@ -90,8 +90,9 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
                     dni.getText().toString(),
                     email.getText().toString(),
                     password.getText().toString(),
-                    Integer.parseInt(comission.getText().toString()),
-                    Integer.parseInt(group.getText().toString()));
+                    commission.getText().toString(),
+                    group.getText().toString()
+            );
         }
     };
 

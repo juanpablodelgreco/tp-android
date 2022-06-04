@@ -17,7 +17,7 @@ import com.example.tpsoa.presenters.LoginPresenterImp;
 
 public class LoginViewImp extends Activity implements LoginView {
 
-    private EditText username;
+    private EditText email;
     private EditText password;
     private TextView errorView;
     private ProgressBar progressBar;
@@ -28,7 +28,7 @@ public class LoginViewImp extends Activity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.loginInputUsername);
+        email = findViewById(R.id.loginInputUsername);
         password = findViewById(R.id.loginInputPassword);
         errorView = findViewById(R.id.loginInformationText);
         progressBar = findViewById(R.id.progressBar);
@@ -97,7 +97,7 @@ public class LoginViewImp extends Activity implements LoginView {
 
             switch (v.getId()){
                 case R.id.loginButton:
-                    presenter.validateCredentials(username.getText().toString(), password.getText().toString());
+                    presenter.validateCredentials(email.getText().toString(), password.getText().toString());
                     break;
                 case R.id.loginCreateAccountButton:
                     navigateToCreateAccount();
