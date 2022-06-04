@@ -4,7 +4,13 @@ import android.content.Context;
 
 public interface LoginInteractor {
 
-    void login(Context ct, String username, String password);
+    interface OnFinishListener {
+        void onFinished(int code, String result);
+        void onFailure(Throwable t);
+        void onValidationFieldFail(String message);
+    }
+
+    void login(OnFinishListener ofs, String username, String password);
 }
 
 

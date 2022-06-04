@@ -2,6 +2,7 @@ package com.example.tpsoa.views;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,12 +67,22 @@ public class LoginActivity extends Activity implements LoginView {
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        presenter.onDestroy();
         Log.i("Ejecuto", "onDestroy login Activity");
     }
 
     @Override
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() { progressBar.setVisibility(View.INVISIBLE);}
+
+    @Override
+    public void showErrorMessage(String message) {
+        errorView.setText(message);
+        errorView.setTextColor(Color.RED);
     }
 
     @Override
@@ -88,7 +99,7 @@ public class LoginActivity extends Activity implements LoginView {
 
             switch (v.getId()){
                 case R.id.loginButton:
-                    presenter.validateCredentials(getApplicationContext(), username.getText().toString(), password.getText().toString());
+                    presenter.validateCredentials(username.getText().toString(), password.getText().toString());
                     break;
                 case R.id.loginCreateAccountButton:
                     navigateToCreateAccount();

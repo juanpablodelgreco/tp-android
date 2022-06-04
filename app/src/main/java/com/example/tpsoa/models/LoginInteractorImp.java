@@ -3,6 +3,7 @@ package com.example.tpsoa.models;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 
 import com.example.tpsoa.dtos.LoginRequest;
@@ -23,11 +24,21 @@ public class LoginInteractorImp implements LoginInteractor {
     private String env = "TEST";
 
     @Override
-    public void login(Context ct, String email, String password) {
+    public void login(final OnFinishListener ofs, String email, String password) {
         LoginRequest request = new LoginRequest();
         request.setEnv(env);
         request.setEmail(email);
         request.setPassword(password);
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            ofs.onValidationFieldFail("Email inválido.");
+            return;
+        }
+
+        if(password.length() < 8){
+            ofs.onValidationFieldFail("El password debe ser mayor o igual a 8 carácteres.");
+            return;
+        }
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -41,14 +52,16 @@ public class LoginInteractorImp implements LoginInteractor {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(!response.isSuccessful()) {
+                    ofs.onFinished(response.code(), "Credenciales inválidas.");
                     Log.i("RETROFIT", "CREDENCIALES INVALIDAS");
-                    return;
+                }else {
+                    Log.i("RETROFIT", "LOGIN EXITOSO");
                 }
-                Log.i("RETROFIT", "LOGIN EXITOSO");
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                ofs.onFailure(t);
                 Log.i("RETROFIT", "ERROR DE CONEXIÓN");
             }
         });

@@ -6,7 +6,7 @@ import android.util.Log;
 import com.example.tpsoa.models.LoginInteractor;
 import com.example.tpsoa.views.LoginView;
 
-public class LoginPresenterImp implements LoginPresenter {
+public class LoginPresenterImp implements LoginPresenter, LoginInteractor.OnFinishListener {
     private LoginView loginView;
     private LoginInteractor loginInteractor;
 
@@ -16,10 +16,36 @@ public class LoginPresenterImp implements LoginPresenter {
     }
 
     @Override
-    public void validateCredentials(Context ct, String email, String password) {
+    public void validateCredentials(String email, String password) {
         if(loginView != null){
             loginView.showProgress();
         }
-        loginInteractor.login(ct, email, password);
+        loginInteractor.login(this, email, password);
+    }
+
+    @Override
+    public void onDestroy() {
+        loginView = null;
+    }
+
+    @Override
+    public void onFinished(int code, String result) {
+        if(code == 200){
+            loginView.navigateToCreateAccount();
+        }else{
+            loginView.hideProgress();
+            loginView.showErrorMessage(result);
+        }
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+
+    }
+
+    @Override
+    public void onValidationFieldFail(String message) {
+        loginView.hideProgress();
+        loginView.showErrorMessage(message);
     }
 }
