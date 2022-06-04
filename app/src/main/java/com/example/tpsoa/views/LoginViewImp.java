@@ -10,14 +10,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.tpsoa.CreateAccountActivity;
-import com.example.tpsoa.HomeActivity;
 import com.example.tpsoa.R;
 import com.example.tpsoa.models.LoginInteractorImp;
 import com.example.tpsoa.presenters.LoginPresenter;
 import com.example.tpsoa.presenters.LoginPresenterImp;
 
-public class LoginActivity extends Activity implements LoginView {
+public class LoginViewImp extends Activity implements LoginView {
 
     private EditText username;
     private EditText password;
@@ -87,7 +85,7 @@ public class LoginActivity extends Activity implements LoginView {
 
     @Override
     public void navigateToCreateAccount() {
-        Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+        Intent intent = new Intent(this, CreateAccountViewImp.class);
         startActivity(intent);
     }
 

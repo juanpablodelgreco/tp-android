@@ -4,9 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.tpsoa.models.LoginInteractor;
+import com.example.tpsoa.models.OnFinishListener;
 import com.example.tpsoa.views.LoginView;
 
-public class LoginPresenterImp implements LoginPresenter, LoginInteractor.OnFinishListener {
+public class LoginPresenterImp implements LoginPresenter, OnFinishListener {
     private LoginView loginView;
     private LoginInteractor loginInteractor;
 

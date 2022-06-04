@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAccountActivity">
+    tools:context=".views.CreateAccountViewImp">
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="333dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="408dp"
+        android:layout_height="327dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="121dp">
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="111dp">
 
         <EditText
             android:id="@+id/createAccountInputFirstName"
@@ -51,7 +52,15 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Commission"
-            android:inputType="textPersonName" />
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/createAccountInputGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Group"
+            android:inputType="numberSigned" />
 
         <EditText
             android:id="@+id/createAccountInputPassword"
@@ -61,10 +70,27 @@
             android:hint="Password"
             android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/createAccountButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create Account" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/createAccountError"
+        android:layout_width="173dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="268dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="34dp"
+        android:text="Create Account"
+        app:layout_constraintBottom_toTopOf="@+id/createAccountError"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

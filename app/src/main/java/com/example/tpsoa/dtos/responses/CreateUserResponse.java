@@ -1,4 +1,4 @@
-package com.example.tpsoa.dtos;
+package com.example.tpsoa.dtos.responses;
 
 public class CreateUserResponse {
     private String success;

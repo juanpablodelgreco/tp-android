@@ -1,4 +1,4 @@
-package com.example.tpsoa.dtos;
+package com.example.tpsoa.dtos.requests;
 
 public class LoginRequest {
     private String env;

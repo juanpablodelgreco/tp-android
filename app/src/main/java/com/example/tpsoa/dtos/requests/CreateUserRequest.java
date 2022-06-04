@@ -1,14 +1,17 @@
-package com.example.tpsoa.dtos;
+package com.example.tpsoa.dtos.requests;
+
+import com.google.gson.annotations.SerializedName;
 
 public class CreateUserRequest {
     private String env;
     private String name;
+    @SerializedName("lastname")
     private String lastName;
     private String dni;
     private String email;
     private String password;
-    private String comission;
-    private String group;
+    private int commission;
+    private int group;
 
     public String getEnv() {
         return env;
@@ -58,21 +61,20 @@ public class CreateUserRequest {
         this.password = password;
     }
 
-    public String getComission() {
-        return comission;
+    public int getCommission() {
+        return commission;
     }
 
-    public void setComission(String comission) {
-        this.comission = comission;
+    public void setCommission(int commission) {
+        this.commission = commission;
     }
 
-    public String getGroup() {
+    public int getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(int group) {
         this.group = group;
     }
-
 }
 

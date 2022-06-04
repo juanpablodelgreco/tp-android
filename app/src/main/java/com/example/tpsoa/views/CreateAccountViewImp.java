@@ -1,16 +1,24 @@
-package com.example.tpsoa;
+package com.example.tpsoa.views;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.example.tpsoa.views.LoginActivity;
+import com.example.tpsoa.R;
+import com.example.tpsoa.models.CreateAccountInteractorImp;
+import com.example.tpsoa.models.LoginInteractorImp;
+import com.example.tpsoa.presenters.CreateAccountPresenter;
+import com.example.tpsoa.presenters.CreateAccountPresenterImp;
+import com.example.tpsoa.presenters.LoginPresenter;
+import com.example.tpsoa.presenters.LoginPresenterImp;
 
-public class CreateAccountActivity extends Activity {
+public class CreateAccountViewImp extends Activity implements  CreateAccountView {
 
     private EditText firstName;
     private EditText lastName;
@@ -18,7 +26,10 @@ public class CreateAccountActivity extends Activity {
     private EditText email;
     private EditText comission;
     private EditText password;
+    private EditText group;
+    private TextView errorView;
     private Button btnCreateAccount;
+    private CreateAccountPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +41,12 @@ public class CreateAccountActivity extends Activity {
         dni =(EditText) findViewById(R.id.createAccountInputDNI);
         email =(EditText) findViewById(R.id.createAccountInputEmail);
         comission =(EditText) findViewById(R.id.createAccountInputCommission);
-        password =(EditText) findViewById(R.id.loginInputPassword);
+        password =(EditText) findViewById(R.id.createAccountInputPassword);
+        group =(EditText) findViewById(R.id.createAccountInputGroup);
+        errorView = (TextView) findViewById(R.id.createAccountError);
         btnCreateAccount = (Button) findViewById(R.id.createAccountButton);
         btnCreateAccount.setOnClickListener(listenerButtons);
+        presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
         Log.i("Ejecuto", "onCreate createAccount Activity");
     }
 
@@ -67,11 +81,29 @@ public class CreateAccountActivity extends Activity {
     }
 
     private View.OnClickListener listenerButtons = new View.OnClickListener(){
-        Intent intent;
+
         @Override
         public void onClick(View v) {
-            intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
-            startActivity(intent);
+            presenter.createAccount(
+                    firstName.getText().toString(),
+                    lastName.getText().toString(),
+                    dni.getText().toString(),
+                    email.getText().toString(),
+                    password.getText().toString(),
+                    Integer.parseInt(comission.getText().toString()),
+                    Integer.parseInt(group.getText().toString()));
         }
     };
+
+    @Override
+    public void navigateToLogin() {
+        Intent intent = new Intent(this, LoginViewImp.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        errorView.setText(message);
+        errorView.setTextColor(Color.RED);
+    }
 }

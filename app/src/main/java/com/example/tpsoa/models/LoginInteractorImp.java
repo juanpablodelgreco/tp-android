@@ -1,17 +1,11 @@
 package com.example.tpsoa.models;
 
 
-import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
-import android.view.View;
 
-import com.example.tpsoa.dtos.LoginRequest;
-import com.example.tpsoa.presenters.LoginPresenter;
-import com.example.tpsoa.presenters.LoginPresenterImp;
+import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.services.ApiInterface;
-import com.example.tpsoa.views.LoginActivity;
-import com.example.tpsoa.views.LoginView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,7 +49,7 @@ public class LoginInteractorImp implements LoginInteractor {
                     ofs.onFinished(response.code(), "Credenciales inválidas.");
                     Log.i("RETROFIT", "CREDENCIALES INVALIDAS");
                 }else {
-                    Log.i("RETROFIT", "LOGIN EXITOSO");
+                    ofs.onFinished(200, response.toString());
                 }
             }
 
