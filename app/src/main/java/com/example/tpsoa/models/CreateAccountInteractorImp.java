@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateAccountInteractorImp implements CreateAccountInteractor {
     private String uri = "http://so-unlam.net.ar/api/";
-    private String env = "TEST";
+    private String env = "PROD";
 
     @Override
     public void createAccount(OnFinishListener ofs, String firstName, String lastName, String dni, String email, String commission, String password, String group) {

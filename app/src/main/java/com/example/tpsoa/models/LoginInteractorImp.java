@@ -8,6 +8,11 @@ import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.dtos.responses.LoginResponse;
 import com.example.tpsoa.services.ApiInterface;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,8 +52,13 @@ public class LoginInteractorImp implements LoginInteractor {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()) {
-                    ofs.onFinished(400, "Credenciales inválidas.");
-                    Log.i("RETROFIT", "CREDENCIALES INVALIDAS");
+                    JSONObject jObjError = null;
+                    try {
+                        ofs.onFinished(response.code(), response.errorBody().string());
+                        Log.i("RETROFIT", response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }else {
                     ofs.onFinished(200, response.toString());
                 }
