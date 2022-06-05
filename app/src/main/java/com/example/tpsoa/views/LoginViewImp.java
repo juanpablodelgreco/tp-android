@@ -28,7 +28,7 @@ public class LoginViewImp extends Activity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email = findViewById(R.id.loginInputUsername);
+        email = findViewById(R.id.loginInputEmail);
         password = findViewById(R.id.loginInputPassword);
         errorView = findViewById(R.id.loginInformationText);
         progressBar = findViewById(R.id.progressBar);
@@ -93,8 +93,6 @@ public class LoginViewImp extends Activity implements LoginView {
 
         @Override
         public void onClick(View v) {
-            Intent intent;
-
             switch (v.getId()){
                 case R.id.loginButton:
                     presenter.validateCredentials(email.getText().toString(), password.getText().toString());

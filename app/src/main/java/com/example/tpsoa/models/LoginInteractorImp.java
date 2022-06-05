@@ -5,6 +5,7 @@ import android.util.Log;
 import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.LoginRequest;
+import com.example.tpsoa.dtos.responses.LoginResponse;
 import com.example.tpsoa.services.ApiInterface;
 
 import retrofit2.Call;
@@ -15,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginInteractorImp implements LoginInteractor {
     private String uri = "http://so-unlam.net.ar/api/";
-    private String env = "TEST";
+    private String env = "PROD";
 
     @Override
     public void login(final OnFinishListener ofs, String email, String password) {
@@ -41,12 +42,12 @@ public class LoginInteractorImp implements LoginInteractor {
 
         ApiInterface apInt = retrofit.create(ApiInterface.class);
 
-        Call<String> call = apInt.login(request);
-        call.enqueue(new Callback<String>() {
+        Call<LoginResponse> call = apInt.login(request);
+        call.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()) {
-                    ofs.onFinished(response.code(), "Credenciales inválidas.");
+                    ofs.onFinished(400, "Credenciales inválidas.");
                     Log.i("RETROFIT", "CREDENCIALES INVALIDAS");
                 }else {
                     ofs.onFinished(200, response.toString());
@@ -54,7 +55,7 @@ public class LoginInteractorImp implements LoginInteractor {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
                 ofs.onFailure(t);
                 Log.i("RETROFIT", "ERROR DE CONEXIÓN");
             }

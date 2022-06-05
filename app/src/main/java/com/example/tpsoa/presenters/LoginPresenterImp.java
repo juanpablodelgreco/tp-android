@@ -31,10 +31,10 @@ public class LoginPresenterImp implements LoginPresenter, OnFinishListener {
 
     @Override
     public void onFinished(int code, String result) {
+        loginView.hideProgress();
         if(code == 200){
             loginView.navigateToCreateAccount();
         }else{
-            loginView.hideProgress();
             loginView.showErrorMessage(result);
         }
     }
