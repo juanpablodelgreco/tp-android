@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.tpsoa.R;
 import com.example.tpsoa.models.LoginInteractorImp;
 import com.example.tpsoa.presenters.LoginPresenter;
@@ -19,7 +19,6 @@ public class LoginViewImp extends Activity implements LoginView {
 
     private EditText email;
     private EditText password;
-    private TextView errorView;
     private ProgressBar progressBar;
     private LoginPresenter presenter;
 
@@ -30,7 +29,6 @@ public class LoginViewImp extends Activity implements LoginView {
 
         email = findViewById(R.id.loginInputEmail);
         password = findViewById(R.id.loginInputPassword);
-        errorView = findViewById(R.id.loginInformationText);
         progressBar = findViewById(R.id.progressBar);
         findViewById(R.id.loginButton).setOnClickListener(listenerButtons);
         findViewById(R.id.loginCreateAccountButton).setOnClickListener(listenerButtons);
@@ -78,15 +76,20 @@ public class LoginViewImp extends Activity implements LoginView {
     public void hideProgress() { progressBar.setVisibility(View.INVISIBLE);}
 
     @Override
-    public void showErrorMessage(String message) {
-        errorView.setText(message);
-        errorView.setTextColor(Color.RED);
-    }
-
-    @Override
     public void navigateToCreateAccount() {
         Intent intent = new Intent(this, CreateAccountViewImp.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void navigateToHome() {
+        Intent intent = new Intent(this, HomeActivityImp.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private View.OnClickListener listenerButtons = new View.OnClickListener(){
@@ -95,7 +98,7 @@ public class LoginViewImp extends Activity implements LoginView {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.loginButton:
-                    presenter.validateCredentials(email.getText().toString(), password.getText().toString());
+                        presenter.validateCredentials(getApplicationContext(), email.getText().toString(), password.getText().toString());
                     break;
                 case R.id.loginCreateAccountButton:
                     navigateToCreateAccount();

@@ -4,8 +4,8 @@ import android.util.Log;
 import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.CreateUserRequest;
-import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.dtos.responses.CreateUserResponse;
+import com.example.tpsoa.presenters.OnFinishListener;
 import com.example.tpsoa.services.ApiInterface;
 
 import retrofit2.Call;
@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateAccountInteractorImp implements CreateAccountInteractor {
     private String uri = "http://so-unlam.net.ar/api/";
-    private String env = "PROD";
+    private String env = "TEST";
 
     @Override
     public void createAccount(OnFinishListener ofs, String firstName, String lastName, String dni, String email, String commission, String password, String group) {
@@ -30,22 +30,22 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
             firstName.isEmpty() ||
             lastName.isEmpty()
         ){
-            ofs.onValidationFieldFail("Todos los campos son obligatorios.");
+            ofs.showToast("Todos los campos son obligatorios.");
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            ofs.onValidationFieldFail("Email inválido.");
+            ofs.showToast("Email inválido.");
             return;
         }
 
         if(password.length() < 8){
-            ofs.onValidationFieldFail("La password debe ser mayor o igual a 8 carácteres.");
+            ofs.showToast("La password debe ser mayor o igual a 8 carácteres.");
             return;
         }
 
         if(!commission.equals("1900") && !commission.equals("3900")){
-            ofs.onValidationFieldFail("La comision debe ser 1900 o 3900.");
+            ofs.showToast("La comision debe ser 1900 o 3900.");
             return;
         }
 

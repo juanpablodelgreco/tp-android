@@ -1,14 +1,16 @@
 package com.example.tpsoa.models;
 
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.dtos.responses.LoginResponse;
+import com.example.tpsoa.presenters.OnFinishListener;
 import com.example.tpsoa.services.ApiInterface;
+import com.example.tpsoa.services.ConnectionService;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -24,19 +26,24 @@ public class LoginInteractorImp implements LoginInteractor {
     private String env = "PROD";
 
     @Override
-    public void login(final OnFinishListener ofs, String email, String password) {
+    public void login(final OnFinishListener ofs, Context ctx, String email, String password) {
         LoginRequest request = new LoginRequest();
         request.setEnv(env);
         request.setEmail(email);
         request.setPassword(password);
 
+        if(!ConnectionService.checkConnection(ctx)) {
+              ofs.showToast("No hay conexión a internet");
+              return;
+        }
+
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            ofs.onValidationFieldFail("Email inválido.");
+            ofs.showToast("Email inválido.");
             return;
         }
 
         if(password.length() < 8){
-            ofs.onValidationFieldFail("El password debe ser mayor o igual a 8 carácteres.");
+            ofs.showToast("El password debe ser mayor o igual a 8 carácteres.");
             return;
         }
 
@@ -54,8 +61,8 @@ public class LoginInteractorImp implements LoginInteractor {
                 if(!response.isSuccessful()) {
                     JSONObject jObjError = null;
                     try {
-                        ofs.onFinished(response.code(), response.errorBody().string());
-                        Log.i("RETROFIT", response.errorBody().string());
+                        ofs.onFinished(response.code(), "Error al loguearse.");
+                        Log.i("LOGIN", response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -67,7 +74,7 @@ public class LoginInteractorImp implements LoginInteractor {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 ofs.onFailure(t);
-                Log.i("RETROFIT", "ERROR DE CONEXIÓN");
+                Log.i("LOGIN", "ERROR DE CONEXIÓN");
             }
         });
 

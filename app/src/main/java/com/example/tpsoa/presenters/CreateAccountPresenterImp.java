@@ -1,7 +1,6 @@
 package com.example.tpsoa.presenters;
 
 import com.example.tpsoa.models.CreateAccountInteractor;
-import com.example.tpsoa.models.OnFinishListener;
 import com.example.tpsoa.views.CreateAccountView;
 
 public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFinishListener {
@@ -38,7 +37,7 @@ public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFini
     }
 
     @Override
-    public void onValidationFieldFail(String message) {
-        createAccountView.showErrorMessage(message);
+    public void showToast(String message) {
+
     }
 }

@@ -1,10 +1,8 @@
 package com.example.tpsoa.presenters;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.tpsoa.models.LoginInteractor;
-import com.example.tpsoa.models.OnFinishListener;
 import com.example.tpsoa.views.LoginView;
 
 public class LoginPresenterImp implements LoginPresenter, OnFinishListener {
@@ -17,11 +15,12 @@ public class LoginPresenterImp implements LoginPresenter, OnFinishListener {
     }
 
     @Override
-    public void validateCredentials(String email, String password) {
+    public void validateCredentials(Context ctx, String email, String password) {
         if(loginView != null){
             loginView.showProgress();
         }
-        loginInteractor.login(this, email, password);
+
+        loginInteractor.login(this, ctx, email, password);
     }
 
     @Override
@@ -33,20 +32,20 @@ public class LoginPresenterImp implements LoginPresenter, OnFinishListener {
     public void onFinished(int code, String result) {
         loginView.hideProgress();
         if(code == 200){
-            loginView.navigateToCreateAccount();
+            loginView.navigateToHome();
         }else{
-            loginView.showErrorMessage(result);
+            loginView.showToast("Error al loguearse.");
         }
     }
 
     @Override
     public void onFailure(Throwable t) {
-
+        this.showToast("Fallo el envío del login.");
     }
 
     @Override
-    public void onValidationFieldFail(String message) {
+    public void showToast(String message) {
         loginView.hideProgress();
-        loginView.showErrorMessage(message);
+        loginView.showToast(message);
     }
 }

@@ -1,10 +1,12 @@
-package com.example.tpsoa;
+package com.example.tpsoa.views;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class HomeActivity extends Activity {
+import com.example.tpsoa.R;
+
+public class HomeActivityImp extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
