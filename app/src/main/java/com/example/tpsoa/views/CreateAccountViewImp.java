@@ -24,7 +24,6 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     private EditText commission;
     private EditText password;
     private EditText group;
-    private Button btnCreateAccount;
     private CreateAccountPresenter presenter;
 
     @Override
@@ -39,8 +38,8 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         commission =(EditText) findViewById(R.id.createAccountInputCommission);
         password =(EditText) findViewById(R.id.createAccountInputPassword);
         group =(EditText) findViewById(R.id.createAccountInputGroup);
-        btnCreateAccount = (Button) findViewById(R.id.createAccountButton);
-        btnCreateAccount.setOnClickListener(listenerButtons);
+        findViewById(R.id.createAccountButton).setOnClickListener(listenerButtons);
+        findViewById(R.id.createAccountButtonReturn).setOnClickListener(listenerButtons);
         presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
         Log.i("Ejecuto", "onCreate createAccount Activity");
     }
@@ -76,28 +75,37 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         Log.i("Ejecuto", "onDestroy createAccount Activity");
     }
 
-    private View.OnClickListener listenerButtons = new View.OnClickListener(){
-
-        @Override
-        public void onClick(View v) {
-            presenter.createAccount(
-                    getApplicationContext(),
-                    firstName.getText().toString(),
-                    lastName.getText().toString(),
-                    dni.getText().toString(),
-                    email.getText().toString(),
-                    password.getText().toString(),
-                    commission.getText().toString(),
-                    group.getText().toString()
-            );
-        }
-    };
-
     @Override
     public void navigateToLogin() {
         Intent intent = new Intent(this, LoginViewImp.class);
         startActivity(intent);
     }
+
+
+    private View.OnClickListener listenerButtons = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.createAccountButtonReturn:
+                    navigateToLogin();
+                    break;
+                case R.id.createAccountButton:
+                    presenter.createAccount(
+                            getApplicationContext(),
+                            firstName.getText().toString(),
+                            lastName.getText().toString(),
+                            dni.getText().toString(),
+                            email.getText().toString(),
+                            password.getText().toString(),
+                            commission.getText().toString(),
+                            group.getText().toString()
+                    );
+                    break;
+            }
+        }
+    };
+
 
     @Override
     public void showToast(String message) {
