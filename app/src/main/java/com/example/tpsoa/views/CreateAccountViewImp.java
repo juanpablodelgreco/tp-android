@@ -8,15 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tpsoa.R;
 import com.example.tpsoa.models.CreateAccountInteractorImp;
-import com.example.tpsoa.models.LoginInteractorImp;
 import com.example.tpsoa.presenters.CreateAccountPresenter;
 import com.example.tpsoa.presenters.CreateAccountPresenterImp;
-import com.example.tpsoa.presenters.LoginPresenter;
-import com.example.tpsoa.presenters.LoginPresenterImp;
 
 public class CreateAccountViewImp extends Activity implements  CreateAccountView {
 
@@ -27,7 +24,6 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     private EditText commission;
     private EditText password;
     private EditText group;
-    private TextView errorView;
     private Button btnCreateAccount;
     private CreateAccountPresenter presenter;
 
@@ -43,7 +39,6 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         commission =(EditText) findViewById(R.id.createAccountInputCommission);
         password =(EditText) findViewById(R.id.createAccountInputPassword);
         group =(EditText) findViewById(R.id.createAccountInputGroup);
-        errorView = (TextView) findViewById(R.id.createAccountError);
         btnCreateAccount = (Button) findViewById(R.id.createAccountButton);
         btnCreateAccount.setOnClickListener(listenerButtons);
         presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
@@ -77,6 +72,7 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     @Override
     protected void onDestroy(){
         super.onDestroy();
+        presenter.onDestroy();
         Log.i("Ejecuto", "onDestroy createAccount Activity");
     }
 
@@ -85,6 +81,7 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         @Override
         public void onClick(View v) {
             presenter.createAccount(
+                    getApplicationContext(),
                     firstName.getText().toString(),
                     lastName.getText().toString(),
                     dni.getText().toString(),
@@ -103,8 +100,7 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     }
 
     @Override
-    public void showErrorMessage(String message) {
-        errorView.setText(message);
-        errorView.setTextColor(Color.RED);
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

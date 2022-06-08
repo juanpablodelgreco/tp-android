@@ -1,5 +1,6 @@
 package com.example.tpsoa.models;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
 
@@ -7,6 +8,7 @@ import com.example.tpsoa.dtos.requests.CreateUserRequest;
 import com.example.tpsoa.dtos.responses.CreateUserResponse;
 import com.example.tpsoa.presenters.OnFinishListener;
 import com.example.tpsoa.services.ApiInterface;
+import com.example.tpsoa.services.ConnectionService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +21,7 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
     private String env = "TEST";
 
     @Override
-    public void createAccount(OnFinishListener ofs, String firstName, String lastName, String dni, String email, String commission, String password, String group) {
+    public void createAccount(OnFinishListener ofs, Context ctx, String firstName, String lastName, String dni, String email, String commission, String password, String group) {
 
         if(
             email.isEmpty() ||
@@ -45,7 +47,12 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
         }
 
         if(!commission.equals("1900") && !commission.equals("3900")){
-            ofs.showToast("La comision debe ser 1900 o 3900.");
+            ofs.showToast("La comisión debe ser 1900 o 3900.");
+            return;
+        }
+
+        if(!ConnectionService.checkConnection(ctx)) {
+            ofs.showToast("No hay conexión a internet");
             return;
         }
 
@@ -72,17 +79,17 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
             public void onResponse(Call<CreateUserResponse> call, Response<CreateUserResponse> response) {
                 if(!response.isSuccessful()) {
                     ofs.onFinished(response.code(), "Error al crear el usuario");
-                    Log.i("RETROFIT", "NO SE PUDO CREAR EL USUARIO.");
+                    Log.i("CREATE_USER", "NO SE PUDO CREAR EL USUARIO.");
                 }else {
                     ofs.onFinished(200, "Usuario creado.");
-                    Log.i("RETROFIT", "USUARIO CREADO.");
+                    Log.i("CREATE_USER", "USUARIO CREADO.");
                 }
             }
 
             @Override
             public void onFailure(Call<CreateUserResponse> call, Throwable t) {
                 ofs.onFailure(t);
-                Log.i("RETROFIT", "ERROR DE CONEXIÓN");
+                Log.i("CREATE_USER", "ERROR DE CONEXIÓN");
             }
         });
     }

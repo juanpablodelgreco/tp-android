@@ -1,5 +1,7 @@
 package com.example.tpsoa.presenters;
 
+import android.content.Context;
+
 import com.example.tpsoa.models.CreateAccountInteractor;
 import com.example.tpsoa.views.CreateAccountView;
 
@@ -13,13 +15,13 @@ public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFini
     }
 
     @Override
-    public void createAccount(String name, String lastName, String dni, String email, String password, String comission, String group) {
-        createAccountInteractor.createAccount(this, name, lastName, dni, email, comission, password, group);
+    public void createAccount(Context ctx, String name, String lastName, String dni, String email, String password, String commission, String group) {
+        createAccountInteractor.createAccount(this, ctx, name, lastName, dni, email, commission, password, group);
     }
 
     @Override
     public void onDestroy() {
-
+        createAccountView = null;
     }
 
     @Override
@@ -27,17 +29,18 @@ public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFini
         if(code == 200){
             createAccountView.navigateToLogin();
         }else{
-            createAccountView.showErrorMessage(result);
+
+            this.showToast(result);
         }
     }
 
     @Override
     public void onFailure(Throwable t) {
-
+        this.showToast("Falló al crear usuario.");
     }
 
     @Override
     public void showToast(String message) {
-
+        createAccountView.showToast(message);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.tpsoa.views;
 
 public interface CreateAccountView {
-    public void navigateToLogin();
-    void showErrorMessage(String message);
+    void navigateToLogin();
+    void showToast(String message);
 }

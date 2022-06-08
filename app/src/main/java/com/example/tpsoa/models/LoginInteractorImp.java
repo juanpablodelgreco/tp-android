@@ -4,17 +4,13 @@ package com.example.tpsoa.models;
 import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
-
 import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.dtos.responses.LoginResponse;
 import com.example.tpsoa.presenters.OnFinishListener;
 import com.example.tpsoa.services.ApiInterface;
 import com.example.tpsoa.services.ConnectionService;
-
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,11 +28,6 @@ public class LoginInteractorImp implements LoginInteractor {
         request.setEmail(email);
         request.setPassword(password);
 
-        if(!ConnectionService.checkConnection(ctx)) {
-              ofs.showToast("No hay conexión a internet");
-              return;
-        }
-
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             ofs.showToast("Email inválido.");
             return;
@@ -44,6 +35,11 @@ public class LoginInteractorImp implements LoginInteractor {
 
         if(password.length() < 8){
             ofs.showToast("El password debe ser mayor o igual a 8 carácteres.");
+            return;
+        }
+
+        if(!ConnectionService.checkConnection(ctx)) {
+            ofs.showToast("No hay conexión a internet");
             return;
         }
 
