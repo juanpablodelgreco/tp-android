@@ -23,6 +23,12 @@ public class LoginInteractorImp implements LoginInteractor {
 
     @Override
     public void login(final OnFinishListener ofs, Context ctx, String email, String password) {
+
+        if(email.length() == 0 || password.length() == 0){
+            ofs.showToast("Ambos campos son obligatorios.");
+            return;
+        }
+
         LoginRequest request = new LoginRequest();
         request.setEnv(env);
         request.setEmail(email);
@@ -56,12 +62,8 @@ public class LoginInteractorImp implements LoginInteractor {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()) {
                     JSONObject jObjError = null;
-                    try {
-                        ofs.onFinished(response.code(), "Error al loguearse.");
-                        Log.i("LOGIN", response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    ofs.onFinished(response.code(), "Error al loguearse.");
+                    Log.i("LOGIN", "Error al loguearse.\"");
                 }else {
                     ofs.onFinished(200, response.toString());
                 }
