@@ -1,7 +1,9 @@
 package com.example.tpsoa.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +36,11 @@ public class LoginViewImp extends Activity implements LoginView {
         findViewById(R.id.loginCreateAccountButton).setOnClickListener(listenerButtons);
         presenter = new LoginPresenterImp(this, new LoginInteractorImp());
         Log.i("Ejecuto", "onCreate login Activity");
+
+        SharedPreferences p = getSharedPreferences("log", Context.MODE_PRIVATE);
+        String user = p.getString("user","x");
+        String date = p.getString("lastUpdate", "x");
+        Log.i("log", user+"   "+date);
     }
 
     @Override
@@ -77,7 +84,7 @@ public class LoginViewImp extends Activity implements LoginView {
 
     @Override
     public void navigateToCreateAccount() {
-        Intent intent = new Intent(this, CreateAccountViewImp.class);
+        Intent intent = new Intent(this, HistoryViewImp.class);
         startActivity(intent);
     }
 

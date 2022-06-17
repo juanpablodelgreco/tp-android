@@ -2,6 +2,7 @@ package com.example.tpsoa.models;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.Patterns;
 import com.example.tpsoa.dtos.requests.LoginRequest;
@@ -10,7 +11,14 @@ import com.example.tpsoa.presenters.OnFinishListener;
 import com.example.tpsoa.services.ApiInterface;
 import com.example.tpsoa.services.ConnectionService;
 import org.json.JSONObject;
-import java.io.IOException;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,6 +74,7 @@ public class LoginInteractorImp implements LoginInteractor {
                     Log.i("LOGIN", "Error al loguearse.\"");
                 }else {
                     ofs.onFinished(200, response.toString());
+                    registerActivity(ctx, email);
                 }
             }
 
@@ -76,5 +85,17 @@ public class LoginInteractorImp implements LoginInteractor {
             }
         });
 
+    }
+
+    @Override
+    public void registerActivity(Context ctx, String username) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        simpleDateFormat.setTimeZone(TimeZone.getDefault());
+        String dateTime = simpleDateFormat.format(new Date());
+
+        SharedPreferences sp = ctx.getSharedPreferences("log", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(username, dateTime);
+        editor.commit();
     }
 }

@@ -6,6 +6,7 @@ import com.example.tpsoa.presenters.OnFinishListener;
 
 public interface LoginInteractor {
     void login(OnFinishListener ofs, Context ctx, String username, String password);
+    void registerActivity(Context ctx, String username);
 }
 
 
