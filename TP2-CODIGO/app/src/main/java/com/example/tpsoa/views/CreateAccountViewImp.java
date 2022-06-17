@@ -106,7 +106,6 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         }
     };
 
-
     @Override
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

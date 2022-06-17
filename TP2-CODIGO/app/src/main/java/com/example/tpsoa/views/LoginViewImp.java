@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.example.tpsoa.R;
 import com.example.tpsoa.models.LoginInteractorImp;
@@ -84,13 +82,13 @@ public class LoginViewImp extends Activity implements LoginView {
 
     @Override
     public void navigateToCreateAccount() {
-        Intent intent = new Intent(this, HistoryViewImp.class);
+        Intent intent = new Intent(this, CreateAccountViewImp.class);
         startActivity(intent);
     }
 
     @Override
     public void navigateToHome() {
-        Intent intent = new Intent(this, HomeActivityImp.class);
+        Intent intent = new Intent(this, HomeViewImp.class);
         startActivity(intent);
     }
 

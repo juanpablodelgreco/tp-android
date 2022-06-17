@@ -14,7 +14,7 @@ import com.example.tpsoa.R;
 
 import java.util.Map;
 
-public class HistoryViewImp extends Activity {
+public class HistoryViewImp extends Activity implements HistoryView {
     TableLayout layout;
     TextView colUser;
     TextView lastAccess;
@@ -26,10 +26,10 @@ public class HistoryViewImp extends Activity {
         layout = findViewById(R.id.historyLayoutId);
         colUser = findViewById(R.id.columnUserId);
         lastAccess = findViewById(R.id.columnLastAccessId);
-        generateColumn();
+        generateRows();
     }
 
-    private void generateColumn(){
+    private void generateRows(){
         SharedPreferences sp = getSharedPreferences("log", this.MODE_PRIVATE);
         Map<String, ?> data = sp.getAll();
         for(Map.Entry<String, ?> entry : data.entrySet()) {

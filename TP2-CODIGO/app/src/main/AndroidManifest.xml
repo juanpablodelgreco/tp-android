@@ -22,7 +22,7 @@
             android:name=".views.CreateAccountViewImp"
             android:exported="false" />
         <activity
-            android:name=".views.HomeActivityImp"
+            android:name=".views.HomeViewImp"
             android:exported="false" />
         <activity android:name=".views.HistoryViewImp" />
     </application>
