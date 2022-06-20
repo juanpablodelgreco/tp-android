@@ -1,4 +1,5 @@
 package com.example.tpsoa.utils;
+import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -7,14 +8,22 @@ import android.util.Log;
 
 public class Accelerometer {
 
-        private SensorManager smanager;
+        private Activity acc;
+        private SensorManager sManager;
+        private boolean sensorExist;
         private Sensor sensorA;
         private SensorEventListener sensorListener;
         public static final int SHAKE_LIMIT = 800;
         public static int contShake = 0;
 
-        public boolean setShake(){
-            sensorA = smanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        public Accelerometer(Activity acc, SensorManager sManager){
+            this.acc = acc;
+            this.sManager = sManager;
+            this.sensorExist = this.setShake();
+        }
+
+        private boolean setShake(){
+            sensorA = sManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
             if(sensorA == null){
                 return false;
             }
@@ -42,7 +51,8 @@ public class Accelerometer {
                         last_y = y;
                         last_z = z;
                         if(contShake == 2){
-                            System.exit(1);
+                            acc.finishAffinity();
+                            System.exit(0);
                         }
                     }
                 }
@@ -52,15 +62,18 @@ public class Accelerometer {
 
                 }
             };
-            start();
             return true;
         }
 
-        private void start(){
-            smanager.registerListener(sensorListener,sensorA,SensorManager.SENSOR_DELAY_NORMAL);
+        public void start(){
+            sManager.registerListener(sensorListener,sensorA,SensorManager.SENSOR_DELAY_NORMAL);
         }
 
-        public void setSensorManager(SensorManager accelerometer){
-            this.smanager = accelerometer;
+        public void stop(){
+            sManager.unregisterListener(sensorListener);
         }
+
+    public boolean isSensorExist() {
+        return sensorExist;
+    }
 }

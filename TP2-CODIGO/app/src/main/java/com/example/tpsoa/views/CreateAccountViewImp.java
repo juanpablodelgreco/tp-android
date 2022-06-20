@@ -1,7 +1,9 @@
 package com.example.tpsoa.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,8 @@ import com.example.tpsoa.R;
 import com.example.tpsoa.models.CreateAccountInteractorImp;
 import com.example.tpsoa.presenters.CreateAccountPresenter;
 import com.example.tpsoa.presenters.CreateAccountPresenterImp;
+import com.example.tpsoa.utils.Accelerometer;
+import com.example.tpsoa.utils.LightSensor;
 
 public class CreateAccountViewImp extends Activity implements  CreateAccountView {
 
@@ -23,6 +27,10 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     private EditText password;
     private EditText group;
     private CreateAccountPresenter presenter;
+    private SensorManager sManager;
+    private Accelerometer accelerometer;
+    private LightSensor lightSensor;
+    private View contraintLayoutCreateAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +46,12 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         group =(EditText) findViewById(R.id.createAccountInputGroup);
         findViewById(R.id.createAccountButton).setOnClickListener(listenerButtons);
         findViewById(R.id.createAccountButtonReturn).setOnClickListener(listenerButtons);
+        contraintLayoutCreateAccount = findViewById(R.id.contraintLayoutCreateAccountId);
         presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
+
+        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = presenter.getAccelerometer(this, sManager);
+        lightSensor = presenter.getLightSensor(this, sManager, contraintLayoutCreateAccount);
 
         Log.i("Ejecuto", "onCreate createAccount Activity");
     }
@@ -52,18 +65,24 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     @Override
     protected void onResume(){
         super.onResume();
+        accelerometer.start();
+        lightSensor.start();
         Log.i("Ejecuto", "onResume createAccount Activity");
     }
 
     @Override
     protected void onPause(){
         super.onPause();
+        accelerometer.stop();
+        lightSensor.stop();
         Log.i("Ejecuto", "onPause createAccount Activity");
     }
 
     @Override
     protected void onStop(){
         super.onStop();
+        accelerometer.stop();
+        lightSensor.stop();
         Log.i("Ejecuto", "onStop createAccount Activity");
     }
 
@@ -71,6 +90,8 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     protected void onDestroy(){
         super.onDestroy();
         presenter.onDestroy();
+        accelerometer.stop();
+        lightSensor.stop();
         Log.i("Ejecuto", "onDestroy createAccount Activity");
     }
 

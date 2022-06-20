@@ -1,8 +1,10 @@
 package com.example.tpsoa.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -16,12 +18,17 @@ import com.example.tpsoa.dtos.responses.PublicApiResponse;
 import com.example.tpsoa.models.HomeInteractorImpl;
 import com.example.tpsoa.presenters.HomePresenter;
 import com.example.tpsoa.presenters.HomePresenterImpl;
+import com.example.tpsoa.utils.Accelerometer;
+import com.example.tpsoa.utils.LightSensor;
 
 import java.util.List;
 
 public class HomeViewImp extends Activity implements HomeView {
     private HomePresenter presenter;
     private TableLayout layout;
+    private SensorManager sManager;
+    private Accelerometer accelerometer;
+    private LightSensor lightSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +38,41 @@ public class HomeViewImp extends Activity implements HomeView {
         layout = findViewById(R.id.mainTableLayoutId);
         presenter = new HomePresenterImpl(this, new HomeInteractorImpl());
         presenter.getData(getApplicationContext());
+
+        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = presenter.getAccelerometer(this, sManager);
+        lightSensor = presenter.getLightSensor(this, sManager, layout);
     }
 
-     public void navigateToHistory(){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        accelerometer.start();
+        lightSensor.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        accelerometer.stop();
+        lightSensor.stop();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        accelerometer.stop();
+        lightSensor.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        accelerometer.stop();
+        lightSensor.stop();
+    }
+
+    public void navigateToHistory(){
         Intent intent = new Intent(this, HistoryViewImp.class);
         startActivity(intent);
     }
