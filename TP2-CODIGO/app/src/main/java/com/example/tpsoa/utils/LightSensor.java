@@ -1,14 +1,11 @@
 package com.example.tpsoa.utils;
 
-import static android.content.Context.SENSOR_SERVICE;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.View;
 
 public class LightSensor {
@@ -19,7 +16,8 @@ public class LightSensor {
     private View view;
     private Context ctx;
     private Sensor sensorA;
-    private Float maxValue;
+    private final int maxValue = 255;
+    private final int defaultValue = 50;
 
     public LightSensor(Context ctx, SensorManager sManager, View view) {
         this.view = view;
@@ -39,7 +37,7 @@ public class LightSensor {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 float value = sensorEvent.values[0];
-                int newValue = 255 - (int) value;
+                int newValue = value > maxValue ? defaultValue : maxValue - (int) value;
                 view.setBackgroundColor(Color.rgb(newValue, newValue, newValue));
             }
 
