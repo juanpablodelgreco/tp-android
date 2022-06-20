@@ -44,7 +44,6 @@ public class HomeViewImp extends Activity implements HomeView {
 
     @Override
     public void showData( List<PublicApiResponse> data) {
-        Log.i("DATA", data.toString());
         data.remove(data.size()-1);
         for(PublicApiResponse r : data){
             TableRow tvr = new TableRow(this);
