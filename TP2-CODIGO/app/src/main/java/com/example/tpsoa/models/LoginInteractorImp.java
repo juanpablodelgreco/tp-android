@@ -7,16 +7,13 @@ import android.util.Log;
 import android.util.Patterns;
 import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.dtos.responses.LoginResponse;
-import com.example.tpsoa.presenters.OnFinishListener;
-import com.example.tpsoa.services.ApiInterface;
+import com.example.tpsoa.presenters.OnFinishListenerSoa;
+import com.example.tpsoa.services.SoaApiInterface;
 import com.example.tpsoa.services.ConnectionService;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import retrofit2.Call;
@@ -30,7 +27,7 @@ public class LoginInteractorImp implements LoginInteractor {
     private String env = "PROD";
 
     @Override
-    public void login(final OnFinishListener ofs, Context ctx, String email, String password) {
+    public void login(final OnFinishListenerSoa ofs, Context ctx, String email, String password) {
 
         if(email.length() == 0 || password.length() == 0){
             ofs.showToast("Ambos campos son obligatorios.");
@@ -62,7 +59,7 @@ public class LoginInteractorImp implements LoginInteractor {
                 .baseUrl(uri)
                 .build();
 
-        ApiInterface apInt = retrofit.create(ApiInterface.class);
+        SoaApiInterface apInt = retrofit.create(SoaApiInterface.class);
 
         Call<LoginResponse> call = apInt.login(request);
         call.enqueue(new Callback<LoginResponse>() {

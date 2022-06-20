@@ -2,10 +2,11 @@ package com.example.tpsoa.presenters;
 
 import android.content.Context;
 
+import com.example.tpsoa.dtos.responses.PublicApiResponse;
 import com.example.tpsoa.models.CreateAccountInteractor;
 import com.example.tpsoa.views.CreateAccountView;
 
-public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFinishListener {
+public class CreateAccountPresenterImp implements CreateAccountPresenter, OnFinishListenerSoa {
     private CreateAccountView createAccountView;
     private CreateAccountInteractor createAccountInteractor;
 

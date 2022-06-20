@@ -16,14 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".views.HomeViewImp"
+            android:exported="true" />
+        <activity
             android:name=".views.LoginViewImp"
-            android:exported="true"  />
+            android:exported="false"  />
         <activity
             android:name=".views.CreateAccountViewImp"
             android:exported="false" />
-        <activity
-            android:name=".views.HomeViewImp"
-            android:exported="false" />
+
         <activity android:name=".views.HistoryViewImp" />
     </application>
 

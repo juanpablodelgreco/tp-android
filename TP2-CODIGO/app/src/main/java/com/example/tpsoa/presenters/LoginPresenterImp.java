@@ -2,10 +2,11 @@ package com.example.tpsoa.presenters;
 
 import android.content.Context;
 
+import com.example.tpsoa.dtos.responses.PublicApiResponse;
 import com.example.tpsoa.models.LoginInteractor;
 import com.example.tpsoa.views.LoginView;
 
-public class LoginPresenterImp implements LoginPresenter, OnFinishListener {
+public class LoginPresenterImp implements LoginPresenter, OnFinishListenerSoa {
     private LoginView loginView;
     private LoginInteractor loginInteractor;
 

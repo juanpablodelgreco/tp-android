@@ -6,8 +6,8 @@ import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.CreateUserRequest;
 import com.example.tpsoa.dtos.responses.CreateUserResponse;
-import com.example.tpsoa.presenters.OnFinishListener;
-import com.example.tpsoa.services.ApiInterface;
+import com.example.tpsoa.presenters.OnFinishListenerSoa;
+import com.example.tpsoa.services.SoaApiInterface;
 import com.example.tpsoa.services.ConnectionService;
 
 import retrofit2.Call;
@@ -21,7 +21,7 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
     private String env = "PROD";
 
     @Override
-    public void createAccount(OnFinishListener ofs, Context ctx, String firstName, String lastName, String dni, String email, String commission, String password, String group) {
+    public void createAccount(OnFinishListenerSoa ofs, Context ctx, String firstName, String lastName, String dni, String email, String commission, String password, String group) {
 
         if(
             email.isEmpty() ||
@@ -71,7 +71,7 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
                 .baseUrl(uri)
                 .build();
 
-        ApiInterface apInt = retrofit.create(ApiInterface.class);
+        SoaApiInterface apInt = retrofit.create(SoaApiInterface.class);
 
         Call<CreateUserResponse> call = apInt.createAccount(request);
         call.enqueue(new Callback<CreateUserResponse>() {
