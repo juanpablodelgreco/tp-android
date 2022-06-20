@@ -2,11 +2,9 @@ package com.example.tpsoa.views;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,6 +39,7 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         findViewById(R.id.createAccountButton).setOnClickListener(listenerButtons);
         findViewById(R.id.createAccountButtonReturn).setOnClickListener(listenerButtons);
         presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
+
         Log.i("Ejecuto", "onCreate createAccount Activity");
     }
 

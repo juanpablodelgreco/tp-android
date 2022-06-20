@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.tpsoa.R;
 import com.example.tpsoa.models.LoginInteractorImp;
 import com.example.tpsoa.presenters.LoginPresenter;
 import com.example.tpsoa.presenters.LoginPresenterImp;
+import com.example.tpsoa.utils.Accelerometer;
 
 public class LoginViewImp extends Activity implements LoginView {
 
@@ -39,6 +41,14 @@ public class LoginViewImp extends Activity implements LoginView {
         String user = p.getString("user","x");
         String date = p.getString("lastUpdate", "x");
         Log.i("log", user+"   "+date);
+
+        SensorManager a = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        Accelerometer speedWagon = new Accelerometer();
+        speedWagon.setSensorManager(a);
+        boolean resp = speedWagon.setShake();
+        if(!resp){
+            showToast("Acelerómetro no detectado.");
+        }
     }
 
     @Override

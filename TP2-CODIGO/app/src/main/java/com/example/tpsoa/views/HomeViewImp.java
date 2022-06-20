@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TableLayout;
@@ -16,10 +14,8 @@ import android.widget.Toast;
 import com.example.tpsoa.R;
 import com.example.tpsoa.dtos.responses.PublicApiResponse;
 import com.example.tpsoa.models.HomeInteractorImpl;
-import com.example.tpsoa.models.LoginInteractorImp;
 import com.example.tpsoa.presenters.HomePresenter;
 import com.example.tpsoa.presenters.HomePresenterImpl;
-import com.example.tpsoa.presenters.LoginPresenter;
 
 import java.util.List;
 
