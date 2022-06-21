@@ -36,6 +36,7 @@
             android:exported="false" />
 
         <activity android:name=".views.HistoryViewImp" />
+        <activity android:name=".views.TransactionsViewImp" />
     </application>
 
 </manifest>

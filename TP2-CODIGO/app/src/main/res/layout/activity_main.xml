@@ -20,6 +20,12 @@
             android:layout_height="wrap_content"
             android:text="@string/historial" />
 
+        <Button
+            android:id="@+id/transactionsButtonId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="transacciones" />
+
         <TableLayout
             android:id="@+id/mainTableLayoutId"
             android:layout_width="match_parent"

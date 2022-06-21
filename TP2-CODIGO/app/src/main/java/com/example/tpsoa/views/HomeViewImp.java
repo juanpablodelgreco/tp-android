@@ -35,6 +35,7 @@ public class HomeViewImp extends Activity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.historyButtonId).setOnClickListener(listenerButtons);
+        findViewById(R.id.transactionsButtonId).setOnClickListener(listenerButtons);
         layout = findViewById(R.id.mainTableLayoutId);
         presenter = new HomePresenterImpl(this, new HomeInteractorImpl());
         presenter.getData(getApplicationContext());
@@ -74,6 +75,11 @@ public class HomeViewImp extends Activity implements HomeView {
 
     public void navigateToHistory(){
         Intent intent = new Intent(this, HistoryViewImp.class);
+        startActivity(intent);
+    }
+
+    public void navigateToTransactions(){
+        Intent intent = new Intent(this, TransactionsViewImp.class);
         startActivity(intent);
     }
 
@@ -122,6 +128,9 @@ public class HomeViewImp extends Activity implements HomeView {
             switch (v.getId()){
                 case R.id.historyButtonId:
                     navigateToHistory();
+                    break;
+                case R.id.transactionsButtonId:
+                    navigateToTransactions();
                     break;
             }
 
