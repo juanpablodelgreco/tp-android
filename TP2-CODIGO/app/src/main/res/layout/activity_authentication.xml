@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutAuthentication"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.AuthenticationViewImp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Código SMS"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <EditText
+        android:id="@+id/editTextNumero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:enabled="true"
+        android:hint="Numero de celular"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="100dp" />
+
+    <Button
+        android:id="@+id/buttonEnviarCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Enviar"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumero"
+        tools:layout_editor_absoluteX="154dp" />
+
+    <EditText
+        android:id="@+id/textViewCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:enabled="true"
+
+        android:hint="Código recibido"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEnviarCodigo"
+        tools:layout_editor_absoluteX="100dp" />
+
+    <Button
+        android:id="@+id/buttonVerificarCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Ingresar"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCodigo"
+        tools:layout_editor_absoluteX="142dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
