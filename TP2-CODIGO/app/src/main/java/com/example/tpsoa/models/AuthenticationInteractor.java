@@ -6,5 +6,5 @@ import com.example.tpsoa.presenters.OnFinishListenerSoa;
 
 public interface AuthenticationInteractor {
     void send(Context ctx, String number);
-    void verify(Context ctx, String code);
+    boolean verify(Context ctx, String code);
 }

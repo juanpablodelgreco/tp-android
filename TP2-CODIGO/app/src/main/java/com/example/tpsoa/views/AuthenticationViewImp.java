@@ -102,7 +102,9 @@ public class AuthenticationViewImp extends Activity implements AuthenticationVie
                     presenter.sendCode(getApplicationContext(), phoneNumberField.getText().toString());
                     break;
                 case R.id.buttonVerificarCodigo:
-                    presenter.verifyCode(getApplicationContext(), codeField.getText().toString());
+                    if(presenter.verifyCode(getApplicationContext(), codeField.getText().toString())) {
+                        navigateToLogin();
+                    }
             }
         }
     };

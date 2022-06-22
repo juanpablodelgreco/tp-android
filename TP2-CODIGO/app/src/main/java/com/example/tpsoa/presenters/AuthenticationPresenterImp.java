@@ -25,8 +25,8 @@ public class AuthenticationPresenterImp implements AuthenticationPresenter, OnFi
     }
 
     @Override
-    public void verifyCode(Context ctx, String code) {
-        authenticationInteractor.verify( ctx, code);
+    public boolean verifyCode(Context ctx, String code) {
+        return authenticationInteractor.verify( ctx, code);
     }
 
     @Override

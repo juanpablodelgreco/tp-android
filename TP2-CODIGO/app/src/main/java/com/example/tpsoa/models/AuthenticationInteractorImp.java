@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.telephony.SmsManager;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
@@ -31,10 +32,11 @@ public class AuthenticationInteractorImp implements AuthenticationInteractor {
     }
 
     @Override
-    public void verify( Context ctx, String code) {
+    public boolean verify(Context ctx, String code) {
         if(code.length() == 0){
             //showToast("Ingrese el código que se envió al celular");
-            return;
+            return false;
         }
+        return String.valueOf(randNumber).equals(code) ? true : false;
     }
 }
