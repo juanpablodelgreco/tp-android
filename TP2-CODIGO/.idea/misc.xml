@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_create_account.xml" value="0.25" />
+        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_create_account.xml" value="0.1" />
         <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_history.xml" value="0.22" />
-        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_home.xml" value="0.1015625" />
-        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_login.xml" value="0.10260416666666666" />
+        <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/TP2-CODIGO/app/src/main/res/layout/activity_main.xml" value="0.17" />
         <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/app/src/main/res/layout/activity_create_account.xml" value="0.22" />
         <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/app/src/main/res/layout/activity_create_account2.xml" value="0.25" />
         <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Juan Pablo/Desktop/TPSOA2/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Nahuel/Desktop/SOA 1C22/3 - Trabajos Practicos/TP 2/tp-android/TP2-CODIGO/app/src/main/res/layout/activity_authentication.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Nahuel/Desktop/SOA 1C22/3 - Trabajos Practicos/TP 2/tp-android/TP2-CODIGO/app/src/main/res/layout/activity_create_account.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Nahuel/Desktop/SOA 1C22/3 - Trabajos Practicos/TP 2/tp-android/TP2-CODIGO/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Nahuel/Desktop/SOA 1C22/3 - Trabajos Practicos/TP 2/tp-android/TP2-CODIGO/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/Nahuel/Desktop/SOA 1C22/3 - Trabajos Practicos/TP 2/tp-android/TP2-CODIGO/app/src/main/res/layout/authentication_activity_main.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>
