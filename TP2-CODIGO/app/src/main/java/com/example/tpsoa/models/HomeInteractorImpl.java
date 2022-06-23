@@ -38,7 +38,6 @@ public class HomeInteractorImpl implements HomeInteractor {
             @Override
             public void onResponse(Call<List<PublicApiResponse>> call, Response<List<PublicApiResponse>> response) {
                 if(!response.isSuccessful()) {
-                    JSONObject jObjError = null;
                     ofs.onFinished(response.code(), "Error al recibir data.");
                     Log.i("ERROR", "Error al recibir data.\"");
                 }else {

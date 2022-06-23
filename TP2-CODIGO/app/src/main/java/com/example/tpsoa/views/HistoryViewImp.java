@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tpsoa.R;
+import com.example.tpsoa.models.HistoryInteractorImp;
 import com.example.tpsoa.presenters.HistoryPresenter;
 import com.example.tpsoa.presenters.HistoryPresenterImp;
 import com.example.tpsoa.utils.Accelerometer;
@@ -36,9 +37,8 @@ public class HistoryViewImp extends Activity implements HistoryView {
         layout = findViewById(R.id.historyLayoutId);
         colUser = findViewById(R.id.columnUserId);
         lastAccess = findViewById(R.id.columnLastAccessId);
-        presenter = new HistoryPresenterImp(this);
-        generateRows();
-
+        presenter = new HistoryPresenterImp(this, new HistoryInteractorImp());
+        presenter.getData(this);
         sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
         accelerometer = presenter.getAccelerometer(this, sManager);
         lightSensor = presenter.getLightSensor(this, sManager, layout);
@@ -72,9 +72,7 @@ public class HistoryViewImp extends Activity implements HistoryView {
         lightSensor.stop();
     }
 
-    private void generateRows(){
-        SharedPreferences sp = getSharedPreferences("log", this.MODE_PRIVATE);
-        Map<String, ?> data = sp.getAll();
+    public void generateRows(Map<String, ?> data){
         for(Map.Entry<String, ?> entry : data.entrySet()) {
             TableRow tvr = new TableRow(this);
             TextView email = new TextView(this);
@@ -84,16 +82,13 @@ public class HistoryViewImp extends Activity implements HistoryView {
             email.setTextColor(Color.BLACK);
             email.setTextSize(14);
             email.setLayoutParams(colUser.getLayoutParams());
-
             lastAccess.setText(entry.getValue().toString());
             lastAccess.setGravity(Gravity.CENTER_HORIZONTAL);
             lastAccess.setTextColor(Color.BLACK);
             lastAccess.setTextSize(14);
             lastAccess.setLayoutParams(colUser.getLayoutParams());
-
             tvr.addView(email);
             tvr.addView(lastAccess);
-
             layout.addView(tvr);
         }
 

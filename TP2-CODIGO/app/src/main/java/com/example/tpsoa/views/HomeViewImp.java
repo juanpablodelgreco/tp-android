@@ -12,7 +12,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.tpsoa.R;
 import com.example.tpsoa.dtos.responses.PublicApiResponse;
 import com.example.tpsoa.models.HomeInteractorImpl;
@@ -89,17 +88,14 @@ public class HomeViewImp extends Activity implements HomeView {
             name.setText(r.getCasa().getNombre());
             name.setTextSize(20);
             name.setTextColor(Color.GREEN);
-
             purchase.setText(r.getCasa().getCompra());
             purchase.setTextSize(15);
             purchase.setTextColor(Color.BLACK);
             purchase.setGravity(Gravity.CENTER);
-
             sale.setText(r.getCasa().getVenta());
             sale.setTextSize(15);
             sale.setTextColor(Color.BLACK);
             sale.setGravity(Gravity.CENTER);
-
             tvr.addView(name);
             tvr2.addView(purchase);
             tvr2.addView(sale);
