@@ -11,9 +11,8 @@ import com.example.tpsoa.utils.LightSensor;
 import java.util.Map;
 
 public interface HistoryPresenter {
-
-    Accelerometer getAccelerometer(Activity acc, SensorManager sManager);
-    LightSensor getLightSensor(Activity acc, SensorManager sManager, View view);
     void showToast(String message);
     void getData(Context ctx);
+    Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager);
+    LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view);
 }

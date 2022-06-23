@@ -47,9 +47,8 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         findViewById(R.id.createAccountButtonReturn).setOnClickListener(listenerButtons);
         contraintLayoutCreateAccount = findViewById(R.id.contraintLayoutCreateAccountId);
         presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
-        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = presenter.getAccelerometer(this, sManager);
-        lightSensor = presenter.getLightSensor(this, sManager, contraintLayoutCreateAccount);
+        accelerometer = presenter.getAccelerometer(getApplicationContext(), this, sManager);
+        lightSensor = presenter.getLightSensor(getApplicationContext(),this, sManager, contraintLayoutCreateAccount);
         Log.i("Ejecuto", "onCreate createAccount Activity");
     }
 

@@ -12,6 +12,6 @@ public interface AuthenticationPresenter {
     void onDestroy();
     void sendCode(Context ct, String numberPhone);
     void verifyCode(Context ct, String code);
-    Accelerometer getAccelerometer(Activity acc, SensorManager sManager);
-    LightSensor getLightSensor(Activity acc, SensorManager sManager, View view);
+    Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager);
+    LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view);
 }

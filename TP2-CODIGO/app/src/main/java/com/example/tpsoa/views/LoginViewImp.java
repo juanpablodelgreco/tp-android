@@ -40,9 +40,8 @@ public class LoginViewImp extends Activity implements LoginView {
         findViewById(R.id.loginButton).setOnClickListener(listenerButtons);
         findViewById(R.id.loginCreateAccountButton).setOnClickListener(listenerButtons);
         presenter = new LoginPresenterImp(this, new LoginInteractorImp());
-        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = presenter.getAccelerometer(this, sManager);
-        lightSensor = presenter.getLightSensor(this, sManager, constraintLayoutLogin);
+        accelerometer = presenter.getAccelerometer(getApplicationContext(), this, sManager);
+        lightSensor = presenter.getLightSensor(getApplicationContext(),this, sManager, constraintLayoutLogin);
         Log.i("Ejecuto", "onCreate login Activity");
     }
 

@@ -10,6 +10,6 @@ import com.example.tpsoa.utils.LightSensor;
 
 public interface HomePresenter {
     void getData(Context ctx);
-    Accelerometer getAccelerometer(Activity acc, SensorManager sManager);
-    LightSensor getLightSensor(Activity acc, SensorManager sManager, View view);
+    Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager);
+    LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view);
 }

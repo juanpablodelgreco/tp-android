@@ -36,7 +36,8 @@ public class HistoryPresenterImp implements HistoryPresenter{
     }
 
     @Override
-    public Accelerometer getAccelerometer(Activity acc, SensorManager sManager) {
+    public Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager) {
+        sManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
         Accelerometer accelerometer = new Accelerometer(acc, sManager);
         if(!accelerometer.isSensorExist()){
             historyView.showToast("Acelerómetro no detectado.");
@@ -46,7 +47,8 @@ public class HistoryPresenterImp implements HistoryPresenter{
     }
 
     @Override
-    public LightSensor getLightSensor(Activity acc, SensorManager sManager, View view){
+    public LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view) {
+        sManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
         LightSensor lightSensor = new LightSensor(acc, sManager, view);
         if(!lightSensor.isSensorExist()){
             showToast("Sensor de luz no detectado.");

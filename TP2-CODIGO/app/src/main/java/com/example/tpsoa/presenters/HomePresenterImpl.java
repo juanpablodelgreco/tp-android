@@ -27,6 +27,28 @@ public class HomePresenterImpl implements HomePresenter, OnFinishListenerPublic 
     }
 
     @Override
+    public Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager) {
+        sManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
+        Accelerometer accelerometer = new Accelerometer(acc, sManager);
+        if(!accelerometer.isSensorExist()){
+            showToast("Acelerómetro no detectado.");
+        }
+
+        return accelerometer;
+    }
+
+    @Override
+    public LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view) {
+        sManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
+        LightSensor lightSensor = new LightSensor(acc, sManager, view);
+        if(!lightSensor.isSensorExist()){
+            showToast("Sensor de luz no detectado.");
+        }
+
+        return lightSensor;
+    }
+
+    @Override
     public void onFinished(int code, List<PublicApiResponse> data) {
         homeView.showData(data);
     }
@@ -44,26 +66,6 @@ public class HomePresenterImpl implements HomePresenter, OnFinishListenerPublic 
     @Override
     public void showToast(String message) {
         homeView.showToast(message);
-    }
-
-    @Override
-    public Accelerometer getAccelerometer(Activity acc, SensorManager sManager){
-        Accelerometer accelerometer = new Accelerometer(acc, sManager);
-        if(!accelerometer.isSensorExist()){
-            showToast("Acelerómetro no detectado.");
-        }
-
-        return accelerometer;
-    }
-
-    @Override
-    public LightSensor getLightSensor(Activity acc, SensorManager sManager, View view){
-        LightSensor lightSensor = new LightSensor(acc, sManager, view);
-        if(!lightSensor.isSensorExist()){
-            showToast("Sensor de luz no detectado.");
-        }
-
-        return lightSensor;
     }
 
 }

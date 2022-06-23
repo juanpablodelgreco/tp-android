@@ -14,23 +14,45 @@ public class AuthenticationPresenterImp implements AuthenticationPresenter, OnFi
     private AuthenticationView authenticationView;
     private AuthenticationInteractor authenticationInteractor;
 
-    public AuthenticationPresenterImp(AuthenticationView authenticationView, AuthenticationInteractor authenticationInteractor){
+    public AuthenticationPresenterImp(AuthenticationView authenticationView, AuthenticationInteractor authenticationInteractor) {
         this.authenticationView = authenticationView;
         this.authenticationInteractor = authenticationInteractor;
     }
 
     @Override
     public void sendCode(Context ctx, String numberPhone) {
-        authenticationInteractor.send( ctx, this, numberPhone);
+        authenticationInteractor.send(ctx, this, numberPhone);
     }
 
     @Override
     public void verifyCode(Context ctx, String code) {
-        if(authenticationInteractor.verify( ctx, this, code)){
+        if (authenticationInteractor.verify(ctx, this, code)) {
             authenticationView.navigateToLogin();
-        }else{
+        } else {
             this.showToast("Código de verificación erróneo.");
         }
+    }
+
+    @Override
+    public Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager) {
+        sManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
+        Accelerometer accelerometer = new Accelerometer(acc, sManager);
+        if (!accelerometer.isSensorExist()) {
+            showToast("Acelerómetro no detectado.");
+        }
+
+        return accelerometer;
+    }
+
+    @Override
+    public LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view) {
+        sManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
+        LightSensor lightSensor = new LightSensor(acc, sManager, view);
+        if (!lightSensor.isSensorExist()) {
+            showToast("Sensor de luz no detectado.");
+        }
+
+        return lightSensor;
     }
 
     @Override
@@ -40,9 +62,9 @@ public class AuthenticationPresenterImp implements AuthenticationPresenter, OnFi
 
     @Override
     public void onFinished(int code, String result) {
-        if(code == 200){
+        if (code == 200) {
             authenticationView.navigateToLogin();
-        }else{
+        } else {
             this.showToast(result);
         }
     }
@@ -56,24 +78,5 @@ public class AuthenticationPresenterImp implements AuthenticationPresenter, OnFi
     public void showToast(String message) {
         authenticationView.showToast(message);
     }
-
-    @Override
-    public Accelerometer getAccelerometer(Activity acc, SensorManager sManager){
-        Accelerometer accelerometer = new Accelerometer(acc, sManager);
-        if(!accelerometer.isSensorExist()){
-            showToast("Acelerómetro no detectado.");
-        }
-
-        return accelerometer;
-    }
-
-    @Override
-    public LightSensor getLightSensor(Activity acc, SensorManager sManager, View view){
-        LightSensor lightSensor = new LightSensor(acc, sManager, view);
-        if(!lightSensor.isSensorExist()){
-            showToast("Sensor de luz no detectado.");
-        }
-
-        return lightSensor;
-    }
 }
+

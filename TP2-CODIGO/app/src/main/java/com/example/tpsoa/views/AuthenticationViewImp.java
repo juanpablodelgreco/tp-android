@@ -30,19 +30,14 @@ public class AuthenticationViewImp extends Activity implements AuthenticationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
-
         codeField = findViewById(R.id.textViewCodigo);
         phoneNumberField = findViewById(R.id.editTextNumero);
-
         findViewById(R.id.buttonEnviarCodigo).setOnClickListener(listenerButtons);
         findViewById(R.id.buttonVerificarCodigo).setOnClickListener(listenerButtons);
-
         constraintLayoutAuthentication = findViewById(R.id.constraintLayoutAuthentication);
         presenter = new AuthenticationPresenterImp(this, new AuthenticationInteractorImp());
-
-        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = presenter.getAccelerometer(this, sManager);
-        lightSensor = presenter.getLightSensor(this, sManager, constraintLayoutAuthentication);
+        accelerometer = presenter.getAccelerometer(getApplicationContext(), this, sManager);
+        lightSensor = presenter.getLightSensor(getApplicationContext(),this, sManager, constraintLayoutAuthentication);
     }
 
     @Override

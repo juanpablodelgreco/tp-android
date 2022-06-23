@@ -11,6 +11,6 @@ import com.example.tpsoa.utils.LightSensor;
 public interface LoginPresenter {
     void validateCredentials(Context ct, String username, String password);
     void onDestroy();
-    Accelerometer getAccelerometer(Activity acc, SensorManager sManager);
-    LightSensor getLightSensor(Activity acc, SensorManager sManager, View view);
+    Accelerometer getAccelerometer(Context ctx, Activity acc, SensorManager sManager);
+    LightSensor getLightSensor(Context ctx, Activity acc, SensorManager sManager, View view);
 }

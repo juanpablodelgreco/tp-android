@@ -39,9 +39,8 @@ public class HistoryViewImp extends Activity implements HistoryView {
         lastAccess = findViewById(R.id.columnLastAccessId);
         presenter = new HistoryPresenterImp(this, new HistoryInteractorImp());
         presenter.getData(this);
-        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = presenter.getAccelerometer(this, sManager);
-        lightSensor = presenter.getLightSensor(this, sManager, layout);
+        accelerometer = presenter.getAccelerometer(getApplicationContext(), this, sManager);
+        lightSensor = presenter.getLightSensor(getApplicationContext(),this, sManager, layout);
     }
 
     @Override
