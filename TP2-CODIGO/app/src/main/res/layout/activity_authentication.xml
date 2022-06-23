@@ -7,61 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".views.AuthenticationViewImp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Código SMS"
-        android:textSize="60sp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:layout_width="371dp"
+        android:layout_height="356dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editTextNumero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:enabled="true"
-        android:hint="Numero de celular"
-        android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="100dp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:gravity="center"
+            android:shadowColor="#1A1B1A"
+            android:text="Código SMS"
+            android:textColor="#38FF00"
+            android:textSize="60sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/buttonEnviarCodigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Enviar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumero"
-        tools:layout_editor_absoluteX="154dp" />
+        <EditText
+            android:id="@+id/editTextNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="true"
+            android:hint="Numero de celular"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:visibility="visible" />
 
-    <EditText
-        android:id="@+id/textViewCodigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:enabled="true"
+        <Button
+            android:id="@+id/buttonEnviarCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Enviar" />
 
-        android:hint="Código recibido"
-        app:layout_constraintTop_toBottomOf="@+id/buttonEnviarCodigo"
-        tools:layout_editor_absoluteX="100dp" />
+        <EditText
+            android:id="@+id/textViewCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="true"
 
-    <Button
-        android:id="@+id/buttonVerificarCodigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Ingresar"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCodigo"
-        tools:layout_editor_absoluteX="142dp" />
+            android:hint="Código recibido"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/buttonVerificarCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Ingresar" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,14 @@
 package com.example.tpsoa.views;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.core.app.ActivityCompat;
-
 import com.example.tpsoa.R;
 import com.example.tpsoa.models.AuthenticationInteractorImp;
 import com.example.tpsoa.presenters.AuthenticationPresenter;
@@ -96,15 +91,10 @@ public class AuthenticationViewImp extends Activity implements AuthenticationVie
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.buttonEnviarCodigo:
-                    if (ActivityCompat.checkSelfPermission(AuthenticationViewImp.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(AuthenticationViewImp.this, new String[]{Manifest.permission.SEND_SMS}, 1);
-                    }
                     presenter.sendCode(getApplicationContext(), phoneNumberField.getText().toString());
                     break;
                 case R.id.buttonVerificarCodigo:
-                    if(presenter.verifyCode(getApplicationContext(), codeField.getText().toString())) {
-                        navigateToLogin();
-                    }
+                    presenter.verifyCode(getApplicationContext(), codeField.getText().toString());
             }
         }
     };

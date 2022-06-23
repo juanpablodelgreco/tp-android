@@ -21,12 +21,16 @@ public class AuthenticationPresenterImp implements AuthenticationPresenter, OnFi
 
     @Override
     public void sendCode(Context ctx, String numberPhone) {
-        authenticationInteractor.send( ctx, numberPhone);
+        authenticationInteractor.send( ctx, this, numberPhone);
     }
 
     @Override
-    public boolean verifyCode(Context ctx, String code) {
-        return authenticationInteractor.verify( ctx, code);
+    public void verifyCode(Context ctx, String code) {
+        if(authenticationInteractor.verify( ctx, this, code)){
+            authenticationView.navigateToLogin();
+        }else{
+            this.showToast("Código de verificación erróneo.");
+        }
     }
 
     @Override
