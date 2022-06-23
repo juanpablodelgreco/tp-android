@@ -1,65 +1,56 @@
 package com.example.tpsoa.presenters;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 import android.view.View;
 
 import com.example.tpsoa.dtos.responses.PublicApiResponse;
-import com.example.tpsoa.models.LoginInteractor;
+import com.example.tpsoa.models.HomeInteractor;
 import com.example.tpsoa.utils.Accelerometer;
 import com.example.tpsoa.utils.LightSensor;
-import com.example.tpsoa.views.LoginView;
+import com.example.tpsoa.views.HomeView;
 
-public class LoginPresenterImp implements LoginPresenter, OnFinishListenerSoa {
-    private LoginView loginView;
-    private LoginInteractor loginInteractor;
+import java.util.List;
 
-    public LoginPresenterImp(LoginView loginView, LoginInteractor loginInteractor){
-        this.loginView = loginView;
-        this.loginInteractor = loginInteractor;
+public class HomePresenterImpl implements HomePresenter, OnFinishListenerPublic {
+    private HomeView homeView;
+    private HomeInteractor homeInteractor;
+
+    public HomePresenterImpl(HomeView homeView, HomeInteractor homeInteractor){
+        this.homeView = homeView;
+        this.homeInteractor = homeInteractor;
     }
 
     @Override
-    public void validateCredentials(Context ctx, String email, String password) {
-        if(loginView != null){
-            loginView.showProgress();
-        }
-
-        loginInteractor.login(this, ctx, email, password);
+    public void getData(Context ctx) {
+            homeInteractor.getData(this, ctx);
     }
 
     @Override
-    public void onDestroy() {
-        loginView = null;
+    public void onFinished(int code, List<PublicApiResponse> data) {
+        homeView.showData(data);
     }
 
     @Override
     public void onFinished(int code, String result) {
-        loginView.hideProgress();
-        if(code == 200){
-            loginView.navigateToHome();
-        }else{
-            loginView.showToast("Error al loguearse.");
-        }
+
     }
 
     @Override
     public void onFailure(Throwable t) {
-        this.showToast("Fallo el envío del login.");
+
     }
 
     @Override
     public void showToast(String message) {
-        loginView.hideProgress();
-        loginView.showToast(message);
+        homeView.showToast(message);
     }
 
     @Override
     public Accelerometer getAccelerometer(Activity acc, SensorManager sManager){
         Accelerometer accelerometer = new Accelerometer(acc, sManager);
         if(!accelerometer.isSensorExist()){
-           showToast("Acelerómetro no detectado.");
+            showToast("Acelerómetro no detectado.");
         }
 
         return accelerometer;
@@ -74,4 +65,5 @@ public class LoginPresenterImp implements LoginPresenter, OnFinishListenerSoa {
 
         return lightSensor;
     }
+
 }

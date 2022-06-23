@@ -13,6 +13,25 @@ public class CreateUserRequest {
     private int commission;
     private int group;
 
+    public CreateUserRequest(
+            String name,
+            String lastName,
+            String dni,
+            String email,
+            String password,
+            int commission,
+            int group
+            ){
+        this.env = "PROD";
+        this.name = name;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.email = email;
+        this.password = password;
+        this.commission = commission;
+        this.group = group;
+    }
+
     public String getEnv() {
         return env;
     }

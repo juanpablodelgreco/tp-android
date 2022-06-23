@@ -2,10 +2,11 @@ package com.example.tpsoa.models;
 
 import android.content.Context;
 
-import com.example.tpsoa.presenters.OnFinishListener;
+import com.example.tpsoa.presenters.OnFinishListenerSoa;
 
 public interface LoginInteractor {
-    void login(OnFinishListener ofs, Context ctx, String username, String password);
+    void login(OnFinishListenerSoa ofs, Context ctx, String username, String password);
+    void registerHistory(Context ctx, String username);
 }
 
 

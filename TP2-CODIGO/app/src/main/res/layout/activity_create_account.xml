@@ -2,34 +2,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contraintLayoutCreateAccountId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".views.CreateAccountViewImp">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="413dp"
-        android:layout_height="531dp"
+        android:layout_width="380dp"
+        android:layout_height="717dp"
+        android:layout_marginBottom="4dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:src="@drawable/user_group_296__1_" />
 
         <EditText
             android:id="@+id/createAccountInputFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="First Name"
-            android:inputType="textPersonName|text" />
+            android:hint="Nombre"
+            android:inputType="textPersonName|text"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <EditText
             android:id="@+id/createAccountInputLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Last Name"
-            android:inputType="textPersonName" />
+            android:hint="Apellido"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <EditText
             android:id="@+id/createAccountInputDNI"
@@ -37,7 +51,9 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="DNI"
-            android:inputType="number" />
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <EditText
             android:id="@+id/createAccountInputEmail"
@@ -45,59 +61,54 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <EditText
             android:id="@+id/createAccountInputCommission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Commission"
-            android:inputType="numberSigned" />
+            android:hint="Comisión"
+            android:inputType="numberSigned"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <EditText
             android:id="@+id/createAccountInputGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Group"
-            android:inputType="numberSigned" />
+            android:hint="Grupo"
+            android:inputType="numberSigned"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <EditText
             android:id="@+id/createAccountInputPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:textColorHint="#38FF00" />
 
         <Button
             android:id="@+id/createAccountButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:text="Create Account" />
+            android:minHeight="48dp"
+            android:text="Crear" />
 
         <Button
             android:id="@+id/createAccountButtonReturn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Return" />
+            android:layout_height="48dp"
+            android:text="Volver" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="122dp"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:src="@drawable/user_group_296__1_" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

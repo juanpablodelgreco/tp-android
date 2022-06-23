@@ -4,19 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.HomeActivityImp">
+    tools:context=".views.HomeViewImp">
 
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/textView2"
+        <Button
+            android:id="@+id/historyButtonId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MONEDA" />
+            android:text="@string/historial" />
+
+        <TableLayout
+            android:id="@+id/mainTableLayoutId"
+            android:layout_width="match_parent"
+            android:layout_height="683dp"
+            android:background="@android:color/white"
+            android:clipToPadding="false"
+            android:gravity="center_horizontal">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/cotizaciones"
+                    android:textSize="48sp" />
+            </TableRow>
+
+        </TableLayout>
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
