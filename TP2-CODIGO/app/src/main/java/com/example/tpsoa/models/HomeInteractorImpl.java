@@ -4,9 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import com.example.tpsoa.dtos.responses.PublicApiResponse;
 import com.example.tpsoa.presenters.OnFinishListenerPublic;
-import com.example.tpsoa.services.ConnectionService;
+import com.example.tpsoa.utils.Connection;
 import com.example.tpsoa.services.PublicApiInterface;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class HomeInteractorImpl implements HomeInteractor {
 
     @Override
     public void getData(OnFinishListenerPublic ofs, Context ctx) {
-        if(!ConnectionService.checkConnection(ctx)) {
+        if(!Connection.checkConnection(ctx)) {
             ofs.showToast("No hay conexión a internet");
             return;
         }

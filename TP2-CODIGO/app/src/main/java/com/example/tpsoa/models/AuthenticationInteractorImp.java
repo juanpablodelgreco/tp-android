@@ -3,6 +3,7 @@ package com.example.tpsoa.models;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -29,11 +30,9 @@ public class AuthenticationInteractorImp implements AuthenticationInteractor {
         if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity) ctx, new String[]{Manifest.permission.SEND_SMS}, 1);
         }
-
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, String.valueOf(randNumber), null, null);
-
-        RegisterEventService.register("Send Code", "Se envió código de verificación");
+        RegisterEventService.execute(ctx, "SEND_CODE", "Se envió código de verificación");
         Log.i("Event", "Evento registrado con éxito.");
     }
 

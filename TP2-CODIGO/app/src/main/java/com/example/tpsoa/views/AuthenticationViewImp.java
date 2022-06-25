@@ -49,10 +49,8 @@ public class AuthenticationViewImp extends Activity implements AuthenticationVie
     @Override
     protected void onResume(){
         super.onResume();
-
         accelerometer.start();
         lightSensor.start();
-
         Log.i("Ejecuto", "onResume login Activity");
     }
 

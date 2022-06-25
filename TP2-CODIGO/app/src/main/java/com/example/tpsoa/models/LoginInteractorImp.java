@@ -10,7 +10,7 @@ import com.example.tpsoa.dtos.responses.LoginResponse;
 import com.example.tpsoa.presenters.OnFinishListenerSoa;
 import com.example.tpsoa.services.RegisterEventService;
 import com.example.tpsoa.services.SoaApiInterface;
-import com.example.tpsoa.services.ConnectionService;
+import com.example.tpsoa.utils.Connection;
 import com.example.tpsoa.utils.SessionInfo;
 
 import org.json.JSONObject;
@@ -48,7 +48,7 @@ public class LoginInteractorImp implements LoginInteractor {
             return;
         }
 
-        if(!ConnectionService.checkConnection(ctx)) {
+        if(!Connection.checkConnection(ctx)) {
             ofs.showToast("No hay conexión a internet");
             return;
         }
@@ -71,12 +71,9 @@ public class LoginInteractorImp implements LoginInteractor {
                 }else {
                     ofs.onFinished(200, response.toString());
                     registerHistory(ctx, email);
-
                     LoginResponse resp = response.body();
                     SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
-
-                    RegisterEventService.register("Login", "Usuario logeado.");
-
+                    RegisterEventService.execute(ctx, "LOGIN", "Se registro un logueo en la aplicación.");
                     Log.i("LOGIN", "Logueo exitoso.\"");
                 }
             }

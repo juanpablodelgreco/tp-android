@@ -6,11 +6,10 @@ import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.CreateUserRequest;
 import com.example.tpsoa.dtos.responses.CreateUserResponse;
-import com.example.tpsoa.dtos.responses.LoginResponse;
 import com.example.tpsoa.presenters.OnFinishListenerSoa;
 import com.example.tpsoa.services.RegisterEventService;
 import com.example.tpsoa.services.SoaApiInterface;
-import com.example.tpsoa.services.ConnectionService;
+import com.example.tpsoa.utils.Connection;
 import com.example.tpsoa.utils.SessionInfo;
 
 import retrofit2.Call;
@@ -54,7 +53,7 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
             return;
         }
 
-        if(!ConnectionService.checkConnection(ctx)) {
+        if(!Connection.checkConnection(ctx)) {
             ofs.showToast("No hay conexión a internet");
             return;
         }
@@ -85,11 +84,9 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
                     Log.i("CREATE_USER", "NO SE PUDO CREAR EL USUARIO.");
                 }else {
                     ofs.onFinished(200, "Usuario creado.");
-
                     CreateUserResponse resp = response.body();
                     SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
-                    RegisterEventService.register("CREATE_ACCOUNT", "Se registro un usuario.");
-
+                    RegisterEventService.execute(ctx,"CREATE_ACCOUNT", "Se registro un usuario.");
                     Log.i("CREATE_USER", "USUARIO CREADO.");
                 }
             }

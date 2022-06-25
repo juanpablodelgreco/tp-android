@@ -1,10 +1,10 @@
-package com.example.tpsoa.services;
+package com.example.tpsoa.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public class ConnectionService {
+public class Connection {
         private static ConnectivityManager cm;
         private static NetworkInfo ni;
 
