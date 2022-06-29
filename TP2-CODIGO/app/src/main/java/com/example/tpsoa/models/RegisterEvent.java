@@ -1,15 +1,10 @@
-package com.example.tpsoa.services;
+package com.example.tpsoa.models;
 
-import android.app.IntentService;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 import com.example.tpsoa.dtos.requests.RegisterEventRequest;
 import com.example.tpsoa.dtos.responses.RegisterEventResponse;
+import com.example.tpsoa.interfaces.SoaApiInterface;
 import com.example.tpsoa.utils.SessionInfo;
 
 import java.util.HashMap;
@@ -20,13 +15,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RegisterEventService extends IntentService {
+public class RegisterEvent extends Thread {
+    String type;
+    String msg;
 
-    public RegisterEventService() {
-        super("RegisterEventService");
+    public RegisterEvent(String type, String msg){
+        this.type = type;
+        this.msg = msg;
     }
 
-    private void register(String type, String msg) {
+    public void run(){
+        this.execute();
+    }
+
+    private void execute () {
         HashMap<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         headers.put("Authorization", "Bearer " + SessionInfo.authToken);
@@ -48,21 +50,5 @@ public class RegisterEventService extends IntentService {
                 Log.i("Event", "Error al registrar evento.");
             }
         });
-    }
-
-    public static void execute(Context ctx, String type, String msg){
-        Intent registerEvent = new Intent(ctx, RegisterEventService.class);
-        registerEvent.putExtra("type","LOGIN");
-        registerEvent.putExtra("msg", "Usuario logeado.");
-        ctx.startService(registerEvent);
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        String type = extras.getString("type");
-        String msg = extras.getString("msg");
-        Log.i("SERVICE", "COMENZÓ EJECUCIÓN DEL SERVICE.");
-        register(type, msg);
     }
 }

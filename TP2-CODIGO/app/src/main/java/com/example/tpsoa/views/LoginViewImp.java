@@ -15,7 +15,6 @@ import com.example.tpsoa.R;
 import com.example.tpsoa.models.LoginInteractorImp;
 import com.example.tpsoa.presenters.LoginPresenter;
 import com.example.tpsoa.presenters.LoginPresenterImp;
-import com.example.tpsoa.services.RegisterEventService;
 import com.example.tpsoa.utils.Accelerometer;
 import com.example.tpsoa.utils.LightSensor;
 

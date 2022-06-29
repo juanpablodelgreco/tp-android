@@ -6,9 +6,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
-import com.example.tpsoa.dtos.responses.CreateUserResponse;
-import com.example.tpsoa.services.RegisterEventService;
-
 public class Accelerometer implements SensorEventListener {
 
         private Activity acc;

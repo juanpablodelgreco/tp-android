@@ -3,9 +3,9 @@ package com.example.tpsoa.models;
 import android.content.Context;
 import android.util.Log;
 import com.example.tpsoa.dtos.responses.PublicApiResponse;
+import com.example.tpsoa.interfaces.PublicApiInterface;
 import com.example.tpsoa.presenters.OnFinishListenerPublic;
 import com.example.tpsoa.utils.Connection;
-import com.example.tpsoa.services.PublicApiInterface;
 
 import java.util.List;
 

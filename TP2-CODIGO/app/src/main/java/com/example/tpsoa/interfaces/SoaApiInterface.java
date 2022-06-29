@@ -1,4 +1,4 @@
-package com.example.tpsoa.services;
+package com.example.tpsoa.interfaces;
 
 import com.example.tpsoa.dtos.requests.CreateUserRequest;
 import com.example.tpsoa.dtos.requests.RegisterEventRequest;

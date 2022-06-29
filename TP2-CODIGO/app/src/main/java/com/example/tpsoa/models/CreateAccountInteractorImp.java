@@ -6,9 +6,8 @@ import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.CreateUserRequest;
 import com.example.tpsoa.dtos.responses.CreateUserResponse;
+import com.example.tpsoa.interfaces.SoaApiInterface;
 import com.example.tpsoa.presenters.OnFinishListenerSoa;
-import com.example.tpsoa.services.RegisterEventService;
-import com.example.tpsoa.services.SoaApiInterface;
 import com.example.tpsoa.utils.Connection;
 import com.example.tpsoa.utils.SessionInfo;
 
@@ -86,7 +85,8 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
                     ofs.onFinished(200, "Usuario creado.");
                     CreateUserResponse resp = response.body();
                     SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
-                    RegisterEventService.execute(ctx,"CREATE_ACCOUNT", "Se registro un usuario.");
+                    RegisterEvent rge = new RegisterEvent( "CREATE_ACCOUNT", "Se registro un usuario.");
+                    rge.run();
                     Log.i("CREATE_USER", "USUARIO CREADO.");
                 }
             }

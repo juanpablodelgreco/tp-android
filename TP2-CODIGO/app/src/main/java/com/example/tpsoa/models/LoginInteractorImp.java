@@ -7,9 +7,8 @@ import android.util.Log;
 import android.util.Patterns;
 import com.example.tpsoa.dtos.requests.LoginRequest;
 import com.example.tpsoa.dtos.responses.LoginResponse;
+import com.example.tpsoa.interfaces.SoaApiInterface;
 import com.example.tpsoa.presenters.OnFinishListenerSoa;
-import com.example.tpsoa.services.RegisterEventService;
-import com.example.tpsoa.services.SoaApiInterface;
 import com.example.tpsoa.utils.Connection;
 import com.example.tpsoa.utils.SessionInfo;
 
@@ -73,7 +72,8 @@ public class LoginInteractorImp implements LoginInteractor {
                     registerHistory(ctx, email);
                     LoginResponse resp = response.body();
                     SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
-                    RegisterEventService.execute(ctx, "LOGIN", "Se registro un logueo en la aplicación.");
+                    RegisterEvent rge = new RegisterEvent("LOGIN", "Se registro un logueo en la aplicación.");
+                    rge.run();
                     Log.i("LOGIN", "Logueo exitoso.\"");
                 }
             }
