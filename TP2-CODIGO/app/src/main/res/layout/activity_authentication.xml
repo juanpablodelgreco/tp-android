@@ -36,6 +36,8 @@
             android:hint="Numero de celular"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColor="#26D12D"
+            android:textColorHint="#38FF00"
             android:visibility="visible" />
 
         <Button
@@ -52,7 +54,9 @@
             android:enabled="true"
 
             android:hint="Código recibido"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColor="#38FF00"
+            android:textColorHint="#38FF00" />
 
         <Button
             android:id="@+id/buttonVerificarCodigo"
