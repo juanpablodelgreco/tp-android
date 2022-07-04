@@ -2,53 +2,66 @@ package com.example.tpsoa.models;
 
 import android.util.Log;
 
-import com.example.tpsoa.dtos.requests.RegisterEventRequest;
-import com.example.tpsoa.dtos.responses.RegisterEventResponse;
-import com.example.tpsoa.interfaces.SoaApiInterface;
 import com.example.tpsoa.utils.SessionInfo;
+import com.google.gson.JsonObject;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import java.util.HashMap;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class RegisterEvent extends Thread {
+public class RegisterEvent implements Runnable {
     String type;
-    String msg;
+    String desc;
+    String env;
 
-    public RegisterEvent(String type, String msg){
+    public RegisterEvent(String type, String desc){
         this.type = type;
-        this.msg = msg;
+        this.desc = desc;
+        this.env = "PROD";
     }
 
-    public void run(){
-        this.execute();
+    private void register()
+    {
+        try {
+            JsonObject postData = new JsonObject();
+            postData.addProperty("env", env);
+            postData.addProperty("type_events", type);
+            postData.addProperty("description", desc);
+
+            URL url = new URL("http://so-unlam.net.ar/api/api/event");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Authorization", "Bearer "+ SessionInfo.authToken);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            urlConnection.setDoInput(true);
+            urlConnection.setChunkedStreamingMode(0);
+
+            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                    out, "UTF-8"));
+            writer.write(postData.toString());
+            writer.flush();
+
+            int code = urlConnection.getResponseCode();
+            if (code !=  201) {
+                throw new IOException("Invalid response from server: " + code);
+            }
+
+            Log.i("EVENT", "Evento registrado.");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void execute () {
-        HashMap<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-        headers.put("Authorization", "Bearer " + SessionInfo.authToken);
-        Retrofit rf = new Retrofit.Builder()
-                .baseUrl("http://so-unlam.net.ar/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        SoaApiInterface rfApi = rf.create(SoaApiInterface.class);
-        RegisterEventRequest er = new RegisterEventRequest(type, msg);
-        Call<RegisterEventResponse> call = rfApi.registerEvent(headers, er);
-        call.enqueue(new Callback<RegisterEventResponse>() {
-            @Override
-            public void onResponse(Call<RegisterEventResponse> call, Response<RegisterEventResponse> response) {
-                Log.i("Event", "Evento registrado con éxito.");
-            }
-
-            @Override
-            public void onFailure(Call<RegisterEventResponse> call, Throwable t) {
-                Log.i("Event", "Error al registrar evento.");
-            }
-        });
+    @Override
+    public void run() {
+        this.register();
     }
 }

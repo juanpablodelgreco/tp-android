@@ -73,7 +73,7 @@ public class LoginInteractorImp implements LoginInteractor {
                     LoginResponse resp = response.body();
                     SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
                     RegisterEvent rge = new RegisterEvent("LOGIN", "Se registro un logueo en la aplicación.");
-                    rge.run();
+                    new Thread(rge).start();
                     Log.i("LOGIN", "Logueo exitoso.\"");
                 }
             }

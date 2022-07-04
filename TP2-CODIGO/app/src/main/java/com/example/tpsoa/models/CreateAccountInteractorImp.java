@@ -86,7 +86,7 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
                     CreateUserResponse resp = response.body();
                     SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
                     RegisterEvent rge = new RegisterEvent( "CREATE_ACCOUNT", "Se registro un usuario.");
-                    rge.run();
+                    new Thread(rge).start();
                     Log.i("CREATE_USER", "USUARIO CREADO.");
                 }
             }

@@ -30,7 +30,7 @@ public class AuthenticationInteractorImp implements AuthenticationInteractor {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, String.valueOf(randNumber), null, null);
         RegisterEvent rge = new RegisterEvent( "SEND_CODE", "Se envió código de verificación");
-        rge.run();
+        new Thread(rge).start();
         Log.i("Event", "Evento registrado con éxito.");
     }
 
