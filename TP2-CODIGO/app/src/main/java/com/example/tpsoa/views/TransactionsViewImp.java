@@ -2,6 +2,7 @@ package com.example.tpsoa.views;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -13,12 +14,12 @@ import com.example.tpsoa.presenters.TransactionsPresenterImp;
 public class TransactionsViewImp extends Activity implements TransactionsView{
     private TransactionsPresenterImp presenter;
     private boolean printTrx;
-    private TextView transactions;
+    private TextView transactionsText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transactions);
-        transactions = (TextView) findViewById(R.id.transactionsText);
+        transactionsText = (TextView) findViewById(R.id.transactionsText);
         findViewById(R.id.getTransactionsButtonId).setOnClickListener(listenerButtons);
         findViewById(R.id.buyButtonId).setOnClickListener(listenerButtons);
         presenter = new TransactionsPresenterImp(this);
@@ -52,8 +53,21 @@ public class TransactionsViewImp extends Activity implements TransactionsView{
 
     @Override
     public void showTrx(String transaction) {
-        transactions.append(transaction);
-        transactions.append("\n");
+        transactionsText.append(transaction+"\n");
+
+        int linesToRemove = transactionsText.getLineCount() - 9;
+        try {
+            if (linesToRemove > 0) {
+                for (int i = 0; i < linesToRemove; i++) {
+                    Editable text = transactionsText.getEditableText();
+                    int lineStart = transactionsText.getLayout().getLineStart(0);
+                    int lineEnd = transactionsText.getLayout().getLineEnd(0);
+                    text.delete(lineStart, lineEnd);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

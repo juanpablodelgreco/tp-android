@@ -11,8 +11,8 @@
         android:id="@+id/getTransactionsButtonId"
         android:layout_width="172dp"
         android:layout_height="59dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="464dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="456dp"
         android:text="Ver Transacciones"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
         android:id="@+id/buyButtonId"
         android:layout_width="172dp"
         android:layout_height="59dp"
-        android:layout_marginStart="128dp"
+        android:layout_marginStart="116dp"
         android:layout_marginTop="536dp"
         android:text="Comprar"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,10 +29,11 @@
 
     <TextView
         android:id="@+id/transactionsText"
-        android:layout_width="218dp"
-        android:layout_height="292dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginBottom="104dp"
+        android:layout_width="236dp"
+        android:layout_height="278dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginBottom="112dp"
+        android:maxLines="15"
         app:layout_constraintBottom_toTopOf="@+id/getTransactionsButtonId"
         app:layout_constraintStart_toStartOf="parent" />
 
