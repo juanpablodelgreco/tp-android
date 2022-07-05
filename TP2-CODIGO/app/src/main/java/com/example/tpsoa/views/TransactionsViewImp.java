@@ -18,7 +18,7 @@ public class TransactionsViewImp extends Activity implements TransactionsView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transactions);
-        transactions = findViewById(R.id.transactionsText);
+        transactions = (TextView) findViewById(R.id.transactionsText);
         findViewById(R.id.getTransactionsButtonId).setOnClickListener(listenerButtons);
         findViewById(R.id.buyButtonId).setOnClickListener(listenerButtons);
         presenter = new TransactionsPresenterImp(this);
@@ -51,9 +51,9 @@ public class TransactionsViewImp extends Activity implements TransactionsView{
     }
 
     @Override
-    public void showTrx(String message) {
-        transactions.setText("Hello World");
-        Log.d("Trx", "TEXT");
+    public void showTrx(String transaction) {
+        transactions.append(transaction);
+        transactions.append("\n");
     }
 
 

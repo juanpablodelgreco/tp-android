@@ -22,17 +22,19 @@ public class TransactionsPresenterImp implements TransactionsPresenter{
 
     @Override
     public void showTransactions() {
-        int i = 1;
-        while (i < 100) {
-            transactionsView.showTrx(getTransaction());
-            Log.d("Trx", getTransaction());
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        new Thread( new Runnable() { @Override public void run() {
+            int i = 1;
+            while (i < 100) {
+                transactionsView.showTrx(getTransaction());
+                Log.d("Trx", getTransaction());
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                i++;
             }
-            i++;
-        }
+        } } ).start();
     }
 
     public static String getTransaction() {
