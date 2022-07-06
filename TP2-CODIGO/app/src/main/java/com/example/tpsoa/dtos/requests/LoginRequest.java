@@ -5,12 +5,10 @@ public class LoginRequest {
     private String email;
     private String password;
 
-    public String getEnv() {
-        return env;
-    }
-
-    public void setEnv(String env) {
-        this.env = env;
+    public LoginRequest(String email, String password){
+        this.env = "PROD";
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {

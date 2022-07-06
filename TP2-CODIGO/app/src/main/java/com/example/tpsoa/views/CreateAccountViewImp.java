@@ -36,7 +36,6 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-
         firstName =(EditText) findViewById(R.id.createAccountInputFirstName);
         lastName =(EditText) findViewById(R.id.createAccountInputLastName);
         dni =(EditText) findViewById(R.id.createAccountInputDNI);
@@ -48,11 +47,8 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
         findViewById(R.id.createAccountButtonReturn).setOnClickListener(listenerButtons);
         contraintLayoutCreateAccount = findViewById(R.id.contraintLayoutCreateAccountId);
         presenter = new CreateAccountPresenterImp(this, new CreateAccountInteractorImp());
-
-        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = presenter.getAccelerometer(this, sManager);
-        lightSensor = presenter.getLightSensor(this, sManager, contraintLayoutCreateAccount);
-
+        accelerometer = presenter.getAccelerometer(getApplicationContext(), this, sManager);
+        lightSensor = presenter.getLightSensor(getApplicationContext(),this, sManager, contraintLayoutCreateAccount);
         Log.i("Ejecuto", "onCreate createAccount Activity");
     }
 
@@ -103,7 +99,6 @@ public class CreateAccountViewImp extends Activity implements  CreateAccountView
 
 
     private View.OnClickListener listenerButtons = new View.OnClickListener(){
-
         @Override
         public void onClick(View v) {
             switch (v.getId()) {

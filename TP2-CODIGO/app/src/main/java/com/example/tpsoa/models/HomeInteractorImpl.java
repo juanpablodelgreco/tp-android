@@ -3,10 +3,9 @@ package com.example.tpsoa.models;
 import android.content.Context;
 import android.util.Log;
 import com.example.tpsoa.dtos.responses.PublicApiResponse;
+import com.example.tpsoa.interfaces.PublicApiInterface;
 import com.example.tpsoa.presenters.OnFinishListenerPublic;
-import com.example.tpsoa.services.ConnectionService;
-import com.example.tpsoa.services.PublicApiInterface;
-import org.json.JSONObject;
+import com.example.tpsoa.utils.Connection;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class HomeInteractorImpl implements HomeInteractor {
 
     @Override
     public void getData(OnFinishListenerPublic ofs, Context ctx) {
-        if(!ConnectionService.checkConnection(ctx)) {
+        if(!Connection.checkConnection(ctx)) {
             ofs.showToast("No hay conexión a internet");
             return;
         }
@@ -38,7 +37,6 @@ public class HomeInteractorImpl implements HomeInteractor {
             @Override
             public void onResponse(Call<List<PublicApiResponse>> call, Response<List<PublicApiResponse>> response) {
                 if(!response.isSuccessful()) {
-                    JSONObject jObjError = null;
                     ofs.onFinished(response.code(), "Error al recibir data.");
                     Log.i("ERROR", "Error al recibir data.\"");
                 }else {

@@ -6,9 +6,10 @@ import android.util.Patterns;
 
 import com.example.tpsoa.dtos.requests.CreateUserRequest;
 import com.example.tpsoa.dtos.responses.CreateUserResponse;
+import com.example.tpsoa.interfaces.SoaApiInterface;
 import com.example.tpsoa.presenters.OnFinishListenerSoa;
-import com.example.tpsoa.services.SoaApiInterface;
-import com.example.tpsoa.services.ConnectionService;
+import com.example.tpsoa.utils.Connection;
+import com.example.tpsoa.utils.SessionInfo;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -51,20 +52,20 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
             return;
         }
 
-        if(!ConnectionService.checkConnection(ctx)) {
+        if(!Connection.checkConnection(ctx)) {
             ofs.showToast("No hay conexión a internet");
             return;
         }
 
-        CreateUserRequest request = new CreateUserRequest();
-        request.setEnv(env);
-        request.setEmail(email);
-        request.setPassword(password);
-        request.setDni(dni);
-        request.setCommission(Integer.parseInt(commission));
-        request.setGroup(Integer.parseInt(group));
-        request.setName(firstName);
-        request.setLastName(lastName);
+        CreateUserRequest request = new CreateUserRequest(
+                firstName,
+                lastName,
+                dni,
+                email,
+                password,
+                Integer.parseInt(commission),
+                Integer.parseInt(group)
+        );
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -82,6 +83,10 @@ public class CreateAccountInteractorImp implements CreateAccountInteractor {
                     Log.i("CREATE_USER", "NO SE PUDO CREAR EL USUARIO.");
                 }else {
                     ofs.onFinished(200, "Usuario creado.");
+                    CreateUserResponse resp = response.body();
+                    SessionInfo.setTokens(resp.getToken(), resp.getToken_refresh());
+                    RegisterEvent rge = new RegisterEvent( "CREATE_ACCOUNT", "Se registro un usuario.");
+                    new Thread(rge).start();
                     Log.i("CREATE_USER", "USUARIO CREADO.");
                 }
             }

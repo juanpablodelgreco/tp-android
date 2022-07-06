@@ -33,25 +33,16 @@ public class LoginViewImp extends Activity implements LoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         email = findViewById(R.id.loginInputEmail);
         password = findViewById(R.id.loginInputPassword);
         progressBar = findViewById(R.id.progressBar);
+        constraintLayoutLogin = findViewById(R.id.constraintLayoutLogin);
         findViewById(R.id.loginButton).setOnClickListener(listenerButtons);
         findViewById(R.id.loginCreateAccountButton).setOnClickListener(listenerButtons);
         presenter = new LoginPresenterImp(this, new LoginInteractorImp());
-        constraintLayoutLogin = findViewById(R.id.constraintLayoutLogin);
+        accelerometer = presenter.getAccelerometer(getApplicationContext(), this, sManager);
+        lightSensor = presenter.getLightSensor(getApplicationContext(),this, sManager, constraintLayoutLogin);
         Log.i("Ejecuto", "onCreate login Activity");
-
-        SharedPreferences p = getSharedPreferences("log", Context.MODE_PRIVATE);
-        String user = p.getString("user","x");
-        String date = p.getString("lastUpdate", "x");
-        Log.i("log", user+"   "+date);
-
-        sManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-
-        accelerometer = presenter.getAccelerometer(this, sManager);
-        lightSensor = presenter.getLightSensor(this, sManager, constraintLayoutLogin);
     }
 
     @Override
@@ -63,10 +54,8 @@ public class LoginViewImp extends Activity implements LoginView {
     @Override
     protected void onResume(){
         super.onResume();
-
         accelerometer.start();
         lightSensor.start();
-
         Log.i("Ejecuto", "onResume login Activity");
     }
 
