@@ -45,10 +45,11 @@
         android:layout_width="363dp"
         android:layout_height="345dp"
         android:layout_marginBottom="56dp"
-        android:background="#CCCACA"
+        android:background="#8BC34A"
         android:maxLines="15"
         android:textAlignment="center"
-        android:textColor="#87CF34"
+        android:textColor="#040404"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/getTransactionsButtonId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
