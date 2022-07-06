@@ -4,15 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.hardware.SensorManager;
 import android.view.View;
-
 import com.example.tpsoa.models.HistoryInteractor;
-import com.example.tpsoa.models.HomeInteractor;
-import com.example.tpsoa.models.LoginInteractor;
 import com.example.tpsoa.utils.Accelerometer;
 import com.example.tpsoa.utils.LightSensor;
 import com.example.tpsoa.views.HistoryView;
-import com.example.tpsoa.views.LoginView;
-
 import java.util.Map;
 
 public class HistoryPresenterImp implements HistoryPresenter{

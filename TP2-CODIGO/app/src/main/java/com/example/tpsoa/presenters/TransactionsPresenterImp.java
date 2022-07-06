@@ -66,6 +66,11 @@ public class TransactionsPresenterImp implements TransactionsPresenter {
         }
     }
 
+    public static int getAmount() {
+        Random random = new Random();
+        return random.nextInt(100000-10) + 10;
+    }
+
     private class BuyDolar implements Runnable {
         @Override
         public void run() {
@@ -121,10 +126,5 @@ public class TransactionsPresenterImp implements TransactionsPresenter {
             });
             return;
         }
-    }
-
-    public static int getAmount() {
-        Random random = new Random();
-        return random.nextInt(100000-10) + 10;
     }
 }
