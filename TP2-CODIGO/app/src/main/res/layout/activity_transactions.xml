@@ -7,6 +7,19 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/textView3id"
+        android:layout_width="419dp"
+        android:layout_height="32dp"
+        android:background="#9FEC47"
+        android:text="TRANSACCIONES"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="-8dp"
+        tools:layout_editor_absoluteY="2dp" />
+
     <Button
         android:id="@+id/getTransactionsButtonId"
         android:layout_width="172dp"
@@ -29,12 +42,15 @@
 
     <TextView
         android:id="@+id/transactionsText"
-        android:layout_width="236dp"
-        android:layout_height="278dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="112dp"
+        android:layout_width="363dp"
+        android:layout_height="345dp"
+        android:layout_marginBottom="56dp"
+        android:background="#CCCACA"
         android:maxLines="15"
+        android:textAlignment="center"
+        android:textColor="#87CF34"
         app:layout_constraintBottom_toTopOf="@+id/getTransactionsButtonId"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
