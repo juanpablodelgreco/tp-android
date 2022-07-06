@@ -25,7 +25,8 @@ public class AuthenticationInteractorImp implements AuthenticationInteractor {
         }
 
         if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) ctx, new String[]{Manifest.permission.SEND_SMS}, 1);
+            ofs.showToast("Debe dar permisos para enviar SMS a la aplicación.");
+            return;
         }
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, String.valueOf(randNumber), null, null);
